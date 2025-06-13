@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | 2beSeen</title>
+    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="src/css/header.css">
+    <link rel="stylesheet" href="src/css/carrinho.css">
+    <style>
+        body {
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding: 30px 20px 60px 20px;
+        }
+        h1 {
+            color: #222;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .portfolio-intro {
+            color: #555;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 30px;
+        }
+        .portfolio-item {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+        }
+        .portfolio-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #eee;
+        }
+        .portfolio-content {
+            padding: 18px 16px 16px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .portfolio-title {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 8px;
+        }
+        .portfolio-desc {
+            color: #666;
+            font-size: 0.98rem;
+            flex: 1;
+        }
+        .portfolio-tags {
+            margin-top: 12px;
+        }
+        .portfolio-tag {
+            display: inline-block;
+            background: #ff6600;
+            color: #fff;
+            border-radius: 5px;
+            padding: 3px 10px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            margin-bottom: 4px;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 10px 2vw 60px 2vw; }
+            .portfolio-img { height: 120px; }
+        }
+        footer {
+            background-color: #232526;
+            color: white;
+            padding: 14px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <nav class="main-navbar">
+        <div class="logo-area">
+            <img src="/logo.png" alt="2beSeen" class="logo-img">
+            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/servicos.html">Serviços</a>
+            <a href="/portfolio.html">Portfólio</a>
+            <div class="dropdown">
+                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                <div id="submenu" class="submenu">
+                    <a href="oque-somos.html">O Que Somos</a>
+                    <a href="quem-somos.html">Quem Somos</a>
+                    <a href="equipa.html">A Equipa</a>
+                </div>
+            </div>
+            <a href="/contactos.html">Contactos</a>
+        </div>
+        <div class="header-actions">
+            <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+            <a href="/login.html" class="login-button">Login</a>
+            <div id="perfilCliente" class="perfil-container" style="display:none !important;">
+                <span>Bem-vindo, <span id="nomeCliente"></span></span>
+                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+                <button onclick="logout()" id="logoutBtn" class="logout-button" style="margin-left:8px;">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div id="carrinhoContainer" class="carrinho-container">
+        <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar" style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+        <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+            <span style="font-size:1.2em;">🛒</span> Carrinho
+        </h3>
+        <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+        <div id="carrinhoTotal" style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+        <button onclick="confirmarPedido()" class="carrinho-confirmar" style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar Pedido</button>
+        <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+            <span style="font-size:2em;">🛍️</span><br>
+            O seu carrinho está vazio.
+        </div>
+    </div>
+    </header>
+    <div class="container">
+        <h1>Portfólio</h1>
+        <div class="portfolio-intro">
+            Descubra alguns dos nossos projetos de impressão e design gráfico realizados para clientes de referência.<br>
+            Qualidade, criatividade e profissionalismo em cada trabalho!
+        </div>
+        <div class="portfolio-grid">
+            <!-- Exemplo de item de portfólio -->
+            <div class="portfolio-item">
+                <img src="imagens/banner.jpg" alt="Banner Publicitário" class="portfolio-img">
+                <div class="portfolio-content">
+                    <div class="portfolio-title">Banner Publicitário</div>
+                    <div class="portfolio-desc">Banner em lona de alta resistência para exterior, impressão UV, 3x1m.</div>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Lona</span>
+                        <span class="portfolio-tag">Exterior</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="imagens/flyer.jpg" alt="Flyer Promocional" class="portfolio-img">
+                <div class="portfolio-content">
+                    <div class="portfolio-title">Flyer Promocional</div>
+                    <div class="portfolio-desc">Flyer A5, papel couché 150g, impressão frente e verso, acabamento mate.</div>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Flyer</span>
+                        <span class="portfolio-tag">Papel Couché</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="imagens/cartao.jpg" alt="Cartão de Visita" class="portfolio-img">
+                <div class="portfolio-content">
+                    <div class="portfolio-title">Cartão de Visita</div>
+                    <div class="portfolio-desc">Cartão de visita personalizado, papel 350g, laminação soft touch.</div>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Cartão</span>
+                        <span class="portfolio-tag">Soft Touch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="imagens/vinil.jpg" alt="Montra Vinil" class="portfolio-img">
+                <div class="portfolio-content">
+                    <div class="portfolio-title">Montra em Vinil</div>
+                    <div class="portfolio-desc">Aplicação de vinil impresso e recortado em montra comercial.</div>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Vinil</span>
+                        <span class="portfolio-tag">Montra</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Adiciona mais projetos conforme necessário -->
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 2beSeen - Todos os direitos reservados.
+    </footer>
+    <script src="src/js/global.js"></script>
+    <script src="src/js/carrinho.js"></script>
+</body>
+</html>

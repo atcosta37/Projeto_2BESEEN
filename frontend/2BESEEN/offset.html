@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="src/css/header.css">
+    <title>Offset Digital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 60px auto 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+            padding: 24px;
+        }
+        .services-title {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            font-size: 2.1em;
+            color: #ff6600;
+            letter-spacing: 1px;
+        }
+        .service-card {
+            background: #fff;
+            padding: 24px 18px 20px 18px;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px #ff660022;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .service-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px #ff660044;
+            background: #fff7f0;
+        }
+        .service-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px #ff660022;
+        }
+        .service-card h3 {
+            margin: 10px 0 10px 0;
+            color: #232526;
+            font-size: 1.18em;
+        }
+        .service-card p {
+            color: #444;
+            font-size: 1em;
+            margin-bottom: 18px;
+        }
+        .service-card button {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 0;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05em;
+            width: 100%;
+            box-shadow: 0 2px 8px #ff660033;
+            transition: background 0.2s;
+        }
+        .service-card button:hover {
+            background-color: #e65c00;
+        }
+        footer {
+            background-color: #232526;
+            color: white;
+            padding: 14px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            z-index: 100;
+        }
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="main-navbar">
+        <div class="logo-area">
+            <img src="/logo.png" alt="2beSeen" class="logo-img">
+            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/servicos.html">Serviços</a>
+            <a href="/portfolio.html">Portfólio</a>
+            <div class="dropdown">
+                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                <div id="submenu" class="submenu">
+                    <a href="oque-somos.html">O Que Somos</a>
+                    <a href="quem-somos.html">Quem Somos</a>
+                    <a href="equipa.html">A Equipa</a>
+                </div>
+            </div>
+            <a href="/contactos.html">Contactos</a>
+        </div>
+        <div class="header-actions">
+            <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+            <a href="/login.html" class="login-button">Login</a>
+            <div id="perfilCliente" class="perfil-container" style="display:none !important;">
+                <span>Bem-vindo, <span id="nomeCliente"></span></span>
+                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+                <button onclick="logout()" id="logoutBtn" class="logout-button" style="margin-left:8px;">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div id="carrinhoContainer" class="carrinho-container">
+        <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar" style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+        <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+            <span style="font-size:1.2em;">🛒</span> Carrinho
+        </h3>
+        <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+        <div id="carrinhoTotal" style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+        <button onclick="confirmarPedido()" class="carrinho-confirmar" style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar Pedido</button>
+        <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+            <span style="font-size:2em;">🛍️</span><br>
+            O seu carrinho está vazio.
+        </div>
+    </div>
+</header>
+
+<h2 class="services-title">Offset Digital</h2>
+<div class="container">
+    <div class="service-card">
+        <img src="imagens/impressao.jpg" alt="Flyers">
+        <h3>Flyers</h3>
+        <p>Impressão digital e offset de alta qualidade, unidade SRA3.</p>
+        <button onclick="location.href='/flyers.html'">Personalizar</button>
+    </div>
+    <div class="service-card">
+        <img src="imagens/grande-formato.jpg" alt="Cartões">
+        <h3>Cartões</h3>
+        <p>Impressão digital e offset de alta qualidade, unidade SRA3.</p>
+        <button onclick="location.href='/cartoes.html'">Personalizar</button>
+    </div>
+    <div class="service-card">
+        <img src="imagens/cartoes.jpg" alt="Cartões de Visita">
+        <h3>Bruchuras A5</h3>
+        <p>Personalize as suas bruchuras com qualidade profissional.</p>
+        <button onclick="location.href='/bruchuras.html'">Personalizar</button>
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 2beSeen - Todos os direitos reservados.
+</footer>
+<script src="src/js/carrinho.js"></script>
+<script src="src/js/header.js"></script>
+</body>
+</html>

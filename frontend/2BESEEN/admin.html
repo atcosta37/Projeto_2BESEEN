@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Encomendas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="src/css/header.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px 100px 24px;
+        }
+        .admin-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px #ff660022;
+            padding: 32px 24px 28px 24px;
+            margin-bottom: 36px;
+            transition: box-shadow 0.2s;
+        }
+        .admin-card:hover {
+            box-shadow: 0 8px 32px #ff660044;
+        }
+        .admin-section-title {
+            color: #ff6600;
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px #ff660012;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #eee;
+            text-align: left;
+        }
+        th {
+            background-color: #fff7f0;
+            color: #232526;
+        }
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+        .modal-inbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.45);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-inbox-content {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 95vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            position: relative;
+        }
+        .close-inbox {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-size: 2rem;
+            color: #333;
+            cursor: pointer;
+        }
+        #tabelaStands img {
+            box-shadow: 0 2px 8px #0002;
+            background: #fafafa;
+        }
+        .admin-btn {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px #ff660033;
+            transition: background 0.2s;
+        }
+        .admin-btn:hover {
+            background: #e65c00;
+        }
+        .faturacao-cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            align-items: flex-start;
+        }
+        .faturacao-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px #ff660012;
+            padding: 24px 18px 18px 18px;
+            min-width: 260px;
+            flex: 1;
+            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .faturacao-total-card {
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .faturacao-total-label {
+            font-size: 1.1em;
+            color: #888;
+        }
+        .faturacao-total-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #ff6600;
+            margin-top: 8px;
+        }
+        @media (max-width: 900px) {
+            .container { padding: 40px 4vw 100px 4vw; }
+            table { font-size: 0.95em; }
+            .faturacao-cards-row { flex-direction: column; gap: 18px; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="main-navbar">
+        <div class="logo-area">
+            <img src="/logo.png" alt="2beSeen" class="logo-img">
+            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/servicos.html">Serviços</a>
+            <a href="/portfolio.html">Portfólio</a>
+            <div class="dropdown">
+                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                <div id="submenu" class="submenu">
+                    <a href="oque-somos.html">O Que Somos</a>
+                    <a href="quem-somos.html">Quem Somos</a>
+                    <a href="equipa.html">A Equipa</a>
+                </div>
+            </div>
+            <a href="/contactos.html">Contactos</a>
+        </div>
+        <div class="header-actions">
+            <button onclick="logout()" class="logout-button" style="margin-left:8px;">Logout</button>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <button id="abrirInboxBtn" class="admin-btn">📥 Ver Inbox de Contacto</button>
+
+    <!-- Faturação em cima -->
+    <div class="admin-card">
+        <h2 class="admin-section-title">Faturação</h2>
+        <div class="faturacao-cards-row">
+            <div class="faturacao-card">
+                <h3 style="margin-top:0; color:#ff6600;">Por mês</h3>
+                <canvas id="faturacaoPorMes" height="180"></canvas>
+            </div>
+            <div class="faturacao-card">
+                <h3 style="margin-top:0; color:#ff6600;">Por tipo de serviço</h3>
+                <canvas id="faturacaoPorTipo" height="180"></canvas>
+            </div>
+            <div class="faturacao-card faturacao-total-card">
+                <span class="faturacao-total-label">Total faturado</span>
+                <span id="totalFaturado" class="faturacao-total-value">0 €</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabelas abaixo -->
+    <div class="admin-card">
+        <h2 class="admin-section-title">Painel do Administrador - Encomendas</h2>
+        <table id="tabelaEncomendas">
+            <thead>
+                <tr>
+                    <th>Utilizador</th>
+                    <th>Email</th>
+                    <th>Tamanho</th>
+                    <th>Papel/Material</th>
+                    <th>Quantidade</th>
+                    <th>Arquivo</th>
+                    <th>Tipo de Serviço</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="admin-card">
+        <h2 class="admin-section-title">Encomendas de Stands</h2>
+        <table id="tabelaStands">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Email</th>
+                    <th>Base (LxP)</th>
+                    <th>Cadeiras</th>
+                    <th>Mesas</th>
+                    <th>Paredes</th>
+                    <th>Preço</th>
+                    <th>Imagem</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="modalInbox" class="modal-inbox">
+    <div class="modal-inbox-content">
+        <span class="close-inbox" id="fecharInboxBtn">&times;</span>
+        <h2>Inbox - Mensagens de Contacto</h2>
+        <table id="tabelaMensagens">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Mensagem</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 2beSeen - Todos os direitos reservados.
+</footer>
+<script src="src/js/header.js"></script>
+<script src="src/js/carrinho.js"></script>
+<script>
+    document.getElementById("abrirInboxBtn").onclick = function() {
+        document.getElementById("modalInbox").style.display = "flex";
+        carregarMensagens();
+    };
+    document.getElementById("fecharInboxBtn").onclick = function() {
+        document.getElementById("modalInbox").style.display = "none";
+    };
+    window.onclick = function(event) {
+        const modal = document.getElementById("modalInbox");
+        if (event.target === modal) modal.style.display = "none";
+    };
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const token = localStorage.getItem("jwtToken");
+        if (!token) {
+            alert("Acesso restrito. Efetue login como admin.");
+            window.location.href = "/login";
+            return;
+        }
+
+        try {
+            const resposta = await fetch('/api/admin/encomendas', {
+                headers: { 'Authorization': token }
+            });
+            if (!resposta.ok) throw new Error("Não autorizado");
+
+            const encomendas = await resposta.json();
+            carregarFaturacao(encomendas);
+            const tbody = document.querySelector("#tabelaEncomendas tbody");
+
+            encomendas.forEach(pedido => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${pedido.userId?.nome || 'N/A'}</td>
+                    <td>${pedido.userId?.email || 'N/A'}</td>
+                    <td>${pedido.tamanho}</td>
+                    <td>${pedido.papel}</td>
+                    <td>${pedido.quantidade}</td>
+                    <td>${pedido.arquivo}</td>
+                    <td>${pedido.tipoServico}</td>
+                    <td>${new Date(pedido.dataPedido).toLocaleString()}</td>
+                    <td>
+                        <select onchange="atualizarEstado('${pedido._id}', this.value)">
+                            <option value="pendente" ${pedido.estado === 'pendente' ? 'selected' : ''}>Pendente</option>
+                            <option value="em-processamento" ${pedido.estado === 'em-processamento' ? 'selected' : ''}>Em Processamento</option>
+                            <option value="concluido" ${pedido.estado === 'concluido' ? 'selected' : ''}>Concluído</option>
+                            <option value="enviado" ${pedido.estado === 'enviado' ? 'selected' : ''}>Enviado</option>
+                        </select>   
+                        <button onclick="apagarEncomenda('${pedido._id}')">🗑️ Apagar</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const tbodyStands = document.querySelector("#tabelaStands tbody");
+            encomendas
+                .filter(pedido => pedido.tipoServico === "Stand")
+                .forEach(pedido => {
+                    const tr = document.createElement("tr");
+        let paredesDesc = "";
+        if (Array.isArray(pedido.paredes)) {
+            paredesDesc = pedido.paredes.map(p => `${p.quantidade}x ${p.material}`).join(", ");
+        }
+        let imgHtml = "";
+        if (pedido.imagem) {
+            imgHtml = `
+                <a href="${pedido.imagem}" target="_blank" title="Ver imagem">
+                    <img src="${pedido.imagem}" style="max-width:80px;max-height:60px;border-radius:6px;" alt="stand">
+                </a>
+                <a href="${pedido.imagem}" download="stand_${pedido._id}.png" title="Download imagem" style="margin-left:8px; font-size:1.2em;">⬇️</a>
+            `;
+        }
+        tr.innerHTML = `
+            <td>${pedido.nomeCliente || pedido.userId?.nome || 'N/A'}</td>
+            <td>${pedido.emailCliente || pedido.userId?.email || 'N/A'}</td>
+            <td>${pedido.baseLargura || '-'} x ${pedido.baseProfundidade || '-'}</td>
+            <td>${pedido.cadeiras ?? '-'}</td>
+            <td>${pedido.mesas ?? '-'}</td>
+            <td>${paredesDesc || '-'}</td>
+            <td>${pedido.precoEstimado ? pedido.precoEstimado.toFixed(2) + " €" : '-'}</td>
+            <td>${imgHtml}</td>
+            <td>${new Date(pedido.dataPedido).toLocaleString()}</td>
+            <td>
+                <select onchange="atualizarEstado('${pedido._id}', this.value)">
+                    <option value="pendente" ${pedido.estado === 'pendente' ? 'selected' : ''}>Pendente</option>
+                    <option value="em-processamento" ${pedido.estado === 'em-processamento' ? 'selected' : ''}>Em Processamento</option>
+                    <option value="concluido" ${pedido.estado === 'concluido' ? 'selected' : ''}>Concluído</option>
+                    <option value="enviado" ${pedido.estado === 'enviado' ? 'selected' : ''}>Enviado</option>
+                </select>   
+                <button onclick="apagarEncomenda('${pedido._id}')">🗑️ Apagar</button>
+            </td>
+        `;
+        tbodyStands.appendChild(tr);
+    });
+
+        } catch (err) {
+            alert("Erro ao carregar encomendas. Verifica se tens permissões de administrador.");
+        }
+    });
+
+    async function apagarEncomenda(id) {
+        const confirmar = confirm("Tens a certeza que queres apagar esta encomenda?");
+        if (!confirmar) return;
+
+        const token = localStorage.getItem("jwtToken");
+
+        try {
+            const resposta = await fetch(`/api/admin/encomendas/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': token }
+            });
+
+            if (!resposta.ok) throw new Error("Erro ao apagar");
+
+            alert("Encomenda apagada com sucesso!");
+            location.reload();
+        } catch (err) {
+            alert("Erro ao apagar encomenda.");
+            console.error(err);
+        }
+    }
+
+    async function atualizarEstado(id, novoEstado) {
+        const token = localStorage.getItem("jwtToken");
+
+        try {
+            const resposta = await fetch(`/api/admin/encomendas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify({ estado: novoEstado })
+            });
+
+            if (!resposta.ok) throw new Error("Erro ao atualizar estado");
+
+            alert("Estado atualizado com sucesso!");
+        } catch (err) {
+            alert("Erro ao atualizar o estado da encomenda.");
+            console.error(err);
+        }
+    }
+
+    async function carregarMensagens() {
+        const token = localStorage.getItem("jwtToken");
+        try {
+            const resposta = await fetch('/api/admin/mensagens', {
+                headers: { 'Authorization': token }
+            });
+            if (!resposta.ok) throw new Error("Não autorizado");
+            const mensagens = await resposta.json();
+            const tbody = document.querySelector("#tabelaMensagens tbody");
+            tbody.innerHTML = "";
+            mensagens.forEach(msg => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${new Date(msg.data).toLocaleString()}</td>
+                    <td>${msg.nome}</td>
+                    <td>${msg.email}</td>
+                    <td>${msg.mensagem}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (err) {
+            alert("Erro ao carregar mensagens de contacto.");
+        }
+    }
+
+    async function carregarFaturacao(encomendas) {
+        const faturacaoPorMes = {};
+        const faturacaoPorTipo = {};
+        let total = 0;
+
+        encomendas.forEach(e => {
+            const data = new Date(e.dataPedido);
+            const mes = `${data.getFullYear()}-${String(data.getMonth()+1).padStart(2,'0')}`;
+            const tipo = e.tipoServico || "Outro";
+            const valor = Number(e.precoEstimado) || 0;
+
+            faturacaoPorMes[mes] = (faturacaoPorMes[mes] || 0) + valor;
+            faturacaoPorTipo[tipo] = (faturacaoPorTipo[tipo] || 0) + valor;
+            total += valor;
+        });
+
+        document.getElementById("totalFaturado").textContent = total.toFixed(2) + " €";
+
+        // Gráfico por mês
+        const ctxMes = document.getElementById('faturacaoPorMes').getContext('2d');
+        new Chart(ctxMes, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(faturacaoPorMes),
+                datasets: [{
+                    label: 'Faturação por mês (€)',
+                    data: Object.values(faturacaoPorMes),
+                    backgroundColor: '#ff6600',
+                    borderRadius: 8,
+                    maxBarThickness: 38
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Gráfico por tipo de serviço
+        const ctxTipo = document.getElementById('faturacaoPorTipo').getContext('2d');
+        new Chart(ctxTipo, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(faturacaoPorTipo),
+                datasets: [{
+                    label: 'Faturação por tipo',
+                    data: Object.values(faturacaoPorTipo),
+                    backgroundColor: [
+                        '#ff6600', '#232526', '#ffb84d', '#ff884d', '#4dc9ff', '#36a2eb', '#aaa'
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    function logout() {
+        localStorage.removeItem("jwtToken");
+        window.location.href = "/login";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout | 2beSeen</title>
+    <link rel="stylesheet" href="src/css/header.css">
+    <style>
+        body { background: #f4f4f4; margin: 0; font-family: Arial, sans-serif; }
+        .checkout-container {
+            max-width: 900px;
+            margin: 48px auto 40px auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            padding: 38px 32px 32px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .checkout-resumo {
+            flex: 1;
+            min-width: 320px;
+        }
+        .checkout-form {
+            flex: 1;
+            min-width: 320px;
+        }
+        h2 { color: #ff6600; margin-top: 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+            background: #fff;
+        }
+        th, td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        th { background: #f7f7f7; color: #232526; }
+        .total {
+            font-weight: bold;
+            color: #e65c00;
+            text-align: right;
+            font-size: 1.1em;
+        }
+        label {
+            display: block;
+            margin-top: 14px;
+            font-weight: 600;
+            color: #232526;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1.5px solid #ff6600;
+            border-radius: 7px;
+            font-size: 15px;
+            background-color: #fff7f0;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #ff6600;
+            color: white;
+            padding: 14px 0;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 22px;
+            width: 100%;
+            font-weight: 700;
+            box-shadow: 0 2px 8px #ff660033;
+            transition: background 0.2s;
+        }
+        button[type="submit"]:hover { background-color: #e65c00; }
+        @media (max-width: 900px) {
+            .checkout-container { flex-direction: column; gap: 24px; padding: 18px 4vw; }
+        }
+        footer {
+            background-color: #232526;
+            color: white;
+            padding: 14px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-navbar">
+            <div class="logo-area">
+                <img src="/logo.png" alt="2beSeen" class="logo-img">
+                <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/servicos.html">Serviços</a>
+                <a href="/portfolio.html">Portfólio</a>
+                <div class="dropdown">
+                    <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                    <div id="submenu" class="submenu">
+                        <a href="oque-somos.html">O Que Somos</a>
+                        <a href="quem-somos.html">Quem Somos</a>
+                        <a href="equipa.html">A Equipa</a>
+                    </div>
+                </div>
+                <a href="/contactos.html">Contactos</a>
+            </div>
+        </nav>
+    </header>
+    <div class="checkout-container">
+        <div class="checkout-resumo">
+            <h2>Resumo do Carrinho</h2>
+            <table id="tabelaCheckout">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas do carrinho serão inseridas por JS -->
+                </tbody>
+            </table>
+            <div class="total" id="checkoutTotal">Total: €0.00</div>
+        </div>
+        <div class="checkout-form">
+            <h2>Dados para Entrega</h2>
+            <form id="formCheckout">
+                <label for="morada">Morada de Entrega</label>
+                <textarea id="morada" name="morada" rows="2" required></textarea>
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" required>
+                <button type="submit">Finalizar Pedido</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 2beSeen - Todos os direitos reservados.
+    </footer>
+    
+</body>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    function carregarCarrinho() {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+        const tbody = document.querySelector("#tabelaCheckout tbody");
+        const totalDiv = document.getElementById("checkoutTotal");
+        tbody.innerHTML = "";
+        let total = 0;
+        carrinho.forEach(item => {
+            const preco = parseFloat(item.precoEstimado || 0);
+            total += preco;
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${item.tipoServico || item.produto || ""}</td>
+                <td>${item.quantidade || 1}</td>
+                <td>€${preco.toFixed(2)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+        totalDiv.textContent = "Total: €" + total.toFixed(2);
+    }
+    carregarCarrinho();
+
+    document.getElementById("formCheckout").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("jwtToken");
+        if (!token) {
+            alert("Por favor, faça login para continuar.");
+            window.location.href = "/login.html";
+            return;
+        }
+
+        // Recolhe dados do formulário
+        const morada = document.getElementById("morada").value;
+        const telefone = document.getElementById("telefone").value;
+        const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+
+        // Envia para o backend para criar sessão Stripe
+        try {
+            const resposta = await fetch("/api/stripe/checkout-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                   morada, telefone, carrinho, token
+                })
+            });
+            const data = await resposta.json();
+            if (data.url) {
+                window.location.href = data.url; // Redireciona para Stripe Checkout
+                localStorage.removeItem("carrinho");
+            
+            } else {
+                alert("Erro ao criar sessão de pagamento.");
+            }
+        } catch (err) {
+            console.error("Erro ao processar pagamento:", err);
+            alert("Erro ao processar pagamento.");
+        }
+    });
+</script>
+</html>

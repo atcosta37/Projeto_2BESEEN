@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="src/css/header.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .register-container {
+            max-width: 350px;
+            margin: 60px auto 0 auto;
+            padding: 32px 28px 24px 28px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px #ff660022;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to   { opacity: 1; transform: translateY(0);}
+        }
+        .register-container h2 {
+            margin-bottom: 18px;
+            font-size: 2em;
+            color: #232526;
+            letter-spacing: 1px;
+        }
+        #formregister {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        #formregister input {
+            width: 100%;
+            margin: 0;
+            padding: 12px;
+            border: 1.5px solid #ff6600;
+            border-radius: 7px;
+            font-size: 1em;
+            background: #fff7f0;
+            transition: border 0.2s;
+            box-sizing: border-box;
+        }
+        #formregister input:focus {
+            border: 2px solid #e65c00;
+            outline: none;
+        }
+        #formregister button {
+            width: 100%;
+            height: 44px;
+            margin-top: 10px;
+            background-color: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #ff660033;
+            transition: background 0.2s;
+        }
+        #formregister button:hover {
+            background-color: #e65c00;
+        }
+        .register-links {
+            margin-top: 18px;
+            font-size: 1em;
+        }
+        .register-links a {
+            color: #ff6600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .register-links a:hover {
+            color: #e65c00;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<header>
+    <nav class="main-navbar">
+        <div class="logo-area">
+            <img src="/logo.png" alt="2beSeen" class="logo-img">
+            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/servicos.html">Serviços</a>
+            <a href="/portfolio.html">Portfólio</a>
+            <div class="dropdown">
+                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                <div id="submenu" class="submenu">
+                    <a href="oque-somos.html">O Que Somos</a>
+                    <a href="quem-somos.html">Quem Somos</a>
+                    <a href="equipa.html">A Equipa</a>
+                </div>
+            </div>
+            <a href="/contactos.html">Contactos</a>
+        </div>
+        <div class="header-actions">
+            <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+            <a href="/login.html" class="login-button">Login</a>
+            <div id="perfilCliente" class="perfil-container" style="display:none !important;">
+                <span>Bem-vindo, <span id="nomeCliente"></span></span>
+                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+                <button onclick="logout()" id="logoutBtn" class="logout-button" style="margin-left:8px;">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div id="carrinhoContainer" class="carrinho-container">
+        <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar" style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+        <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+            <span style="font-size:1.2em;">🛒</span> Carrinho
+        </h3>
+        <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+        <div id="carrinhoTotal" style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+        <button onclick="confirmarPedido()" class="carrinho-confirmar" style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar Pedido</button>
+        <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+            <span style="font-size:2em;">🛍️</span><br>
+            O seu carrinho está vazio.
+        </div>
+    </div>
+</header>
+<body>
+    <div class="register-container">
+        <h2><span style="color:#ff6600; font-size:1.2em;">📝</span> Registo</h2>
+        <form id="formregister" action="submit" method="POST">
+            <input type="text" id="nome"  placeholder="Nome" required >
+            <input type="email" id="email"  placeholder="Email" required>
+            <input type="password" id="password"  placeholder="Senha" required>
+            <button type="submit">Registar</button>
+        </form>
+        <div class="register-links">
+            <p>Já tem uma conta? <a href="/login.html">Faça login</a></p>
+        </div>
+    </div>
+</body>
+<script src="src/js/header.js"></script>
+<script src="src/js/carrinho.js"></script>
+<script>
+    document.getElementById("formregister").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const dados = {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    fetch('/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(data =>{
+        if (data.redirectTo) {
+            window.location.href = data.redirectTo; 
+        }
+    })
+    .catch(error => console.error('Erro:', error));
+});
+</script>
+</html>
