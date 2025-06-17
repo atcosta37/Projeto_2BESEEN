@@ -23,7 +23,8 @@ export function initFlyer3D() {
     // Flyer inicial (A4)
     criarFlyerMesh(2.1, 2.97);
 
-    camera.position.z = 5;
+    camera.position.set(0, 0, 5);
+    camera.lookAt(0, 0, 0);
     animate();
 
     // Eventos
@@ -49,6 +50,7 @@ function criarFlyerMesh(largura, altura) {
         flyerMesh.material.map = flyerTexture;
         flyerMesh.material.needsUpdate = true;
     }
+    flyerMesh.position.set(0, 0, 0);
     scene.add(flyerMesh);
 }
     

@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 let scene, camera, renderer, brochureMesh, brochureTexture = null;
 let deveRodar = false;
 
@@ -17,8 +19,10 @@ export function initBrochura3D() {
     scene.add(light);
 
     criarBrochuraMesh(2.1, 2.97); // Tamanho inicial A4
-
-    camera.position.z = 5;
+    camera.position.set(0, 0, 5); // x=0, y=0, z=5
+    camera.lookAt(0, 0, 0);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
     animate();
 
     document.getElementById("formato").addEventListener("change", atualizarTamanhoBrochura);
@@ -42,6 +46,7 @@ function criarBrochuraMesh(largura, altura) {
         brochureMesh.material.map = brochureTexture;
         brochureMesh.material.needsUpdate = true;
     }
+    brochureMesh.position.set(0, 0, 0); // Centralizar a brochura
     scene.add(brochureMesh);
 }
 

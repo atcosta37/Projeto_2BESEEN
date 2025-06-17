@@ -18,7 +18,8 @@ export function initCartao3D() {
 
     criarCardMesh(1.7, 1.1); // Tamanho inicial (5,5x8,5cm em proporção)
 
-    camera.position.z = 4;
+    camera.position.set(0, 0, 4); // x=0, y=0, z=4
+    camera.lookAt(0, 0, 0);
     animate();
 
     document.getElementById("tamanho").addEventListener("change", atualizarTamanhoCard);
