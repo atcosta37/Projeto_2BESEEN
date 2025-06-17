@@ -170,6 +170,7 @@ header {
 }
 
 .perfil-container {
+    position: relative;
     display: flex !important;
     align-items: center;
     gap: 10px;
@@ -178,20 +179,54 @@ header {
     padding: 6px 14px;
     font-size: 1em;
     color: #fff;
+    cursor: pointer;
 }
-.perfil-btn {
+.perfil-nome {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.perfil-dropdown {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: #232526;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px #ff660044;
+    min-width: 120px;
+    z-index: 999;
+    padding: 10px 0;
+}
+
+.perfil-dropdown a,
+.perfil-dropdown button {
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    padding: 10px 18px;
+    font-size: 1em;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.perfil-dropdown a:hover,
+.perfil-dropdown button:hover {
     background: #ff6600;
     color: #232526;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 12px;
-    font-size: 0.95em;
-    margin-left: 6px;
-    text-decoration: none;
-    transition: background 0.2s;
+    max-width: 120px;
 }
-.perfil-btn:hover { background: #e65c00; color: #fff; }
 
+.perfil-container:hover .perfil-dropdown,
+.perfil-container:focus-within .perfil-dropdown {
+    display: flex;
+}
 .openbtn {
     display: none;
     background: none;

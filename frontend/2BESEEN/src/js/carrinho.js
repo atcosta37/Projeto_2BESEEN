@@ -61,7 +61,12 @@ function renderizarCarrinho() {
         };
         const precoItem = typeof item.precoEstimado === "number" ? item.precoEstimado : 0;
         precoTotal += precoItem;
-        li.textContent = `${item.tipoServico ? item.tipoServico.charAt(0).toUpperCase() + item.tipoServico.slice(1) : "Pedido"}: ${item.quantidade}x ${item.formato || item.tamanho ||"" } - ${item.papel} | ${precoItem.toFixed(2)} €`;
+        if (item.tipoServico === "Stand") {
+            li.textContent = `Stand: ${item.baseLargura || ""}x${item.baseProfundidade || ""} | ${precoItem.toFixed(2)} €`;
+        } else {
+            li.textContent = `${item.tipoServico ? item.tipoServico.charAt(0).toUpperCase() + item.tipoServico.slice(1) : "Pedido"}: ${item.quantidade}x ${item.formato || item.tamanho ||"" } - ${item.papel} | ${precoItem.toFixed(2)} €`;
+        }
+
         li.appendChild(btnRemover);
         lista.appendChild(li);
     });
@@ -101,3 +106,4 @@ function toggleCarrinho() {
         carrinhoDiv.classList.toggle("aberto");
     }
 }
+

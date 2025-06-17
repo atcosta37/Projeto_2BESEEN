@@ -160,11 +160,13 @@ footer {
         <div class="header-actions">
             <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
             <a href="/login.html" class="login-button">Login</a>
-            <div id="perfilCliente" class="perfil-container" style="display:none !important;">
-                <span>Bem-vindo, <span id="nomeCliente"></span></span>
-                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                <button onclick="logout()" id="logoutBtn" class="logout-button" style="margin-left:8px;">Logout</button>
+            <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+            <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+            <div class="perfil-dropdown" id="perfilDropdown">
+                <a href="perfilCliente.html" class="perfil-btn">Perfil</a>
+                <button onclick="logout()" class="logout-button">Logout</button>
             </div>
+        </div>
         </div>
     </nav>
     <div id="carrinhoContainer" class="carrinho-container">
@@ -253,15 +255,25 @@ footer {
             document.getElementById(id).addEventListener("input", calcularPreco);
             document.getElementById(id).addEventListener("change", calcularPreco);
         }); 
-        document.getElementById("personalizarForm").addEventListener("submit", function(event) {
+        document.getElementById("personalizarForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const arquivo = document.getElementById("arquivo").files[0];
+            let arquivoUrl = "";
+
+            if (arquivo) {
+                const formData = new FormData();
+                formData.append("arquivo", arquivo);
+                const resp = await fetch("/api/upload", { method: "POST", body: formData });
+                const data = await resp.json();
+                arquivoUrl = data.url; // O backend deve devolver { url: "/uploads/ficheiro.pdf" }
+                console.log("Arquivo enviado:", arquivoUrl);
+            }
             const dadosPedido = {
                 tipoServico: "grande formato",
                 papel: document.getElementById("material").value,
                 tamanho: `${document.getElementById("largura").value}x${document.getElementById("altura").value}`,
                 quantidade: document.getElementById("quantidade").value,
-                arquivo: arquivo ? arquivo.name : "Nenhum arquivo",
+                arquivo: arquivoUrl,
                 precoEstimado: document.getElementById("precoEstimado").textContent.replace("Preço estimado: €", "")
             };
             adicionarAoCarrinho(dadosPedido);

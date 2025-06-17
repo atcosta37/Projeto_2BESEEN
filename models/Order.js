@@ -29,7 +29,9 @@ const orderSchema = new mongoose.Schema({
     paredes: [paredeSchema],
     imagem: String, // base64 ou URL
     nomeCliente: String,
-    emailCliente: String
+    emailCliente: String,
+    morada: String,
+    telefoneCliente: Number
 });
 
 const Order = mongoose.model('Order', orderSchema, 'Orders');

@@ -125,10 +125,12 @@
         <div class="header-actions">
             <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
             <a href="/login.html" class="login-button">Login</a>
-            <div id="perfilCliente" class="perfil-container" style="display:none !important;">
-                <span>Bem-vindo, <span id="nomeCliente"></span></span>
-                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                <button onclick="logout()" id="logoutBtn" class="logout-button" style="margin-left:8px;">Logout</button>
+            <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+                <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+                <div class="perfil-dropdown" id="perfilDropdown">
+                    <a href="perfilCliente.html" class="perfil-btn">Perfil</a>
+                    <button onclick="logout()" class="logout-button">Logout</button>
+                </div>
             </div>
         </div>
     </nav>

@@ -1,8 +1,8 @@
-const { mod } = require('three/tsl');
+
 const Order = require('../models/Order');
 
 
-async function createOrderRaw(orderData) {
+exports.createOrderRaw = async (orderData) => {
     const order = new Order(orderData);
     return await order.save();
 }
@@ -82,4 +82,5 @@ exports.deleteOrder = async (req, res) => {
     }
 };
 
-exports.createOrderRaw = createOrderRaw;
+
+

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Checkout | 2beSeen</title>
     <link rel="stylesheet" href="src/css/header.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=AULGRKdaT0M05UDzALmTMzUF_W_wlArHNWs1DLNdkk2qR7AtOBCGHfORPwV8XZ8qN8_qcDBwyud1kZj1&currency=EUR"></script>
     <style>
         body { background: #f4f4f4; margin: 0; font-family: Arial, sans-serif; }
         .checkout-container {
@@ -60,7 +61,8 @@
             background-color: #fff7f0;
             box-sizing: border-box;
         }
-        button[type="submit"] {
+        /* Remove o botão de submit */
+        /* button[type="submit"] {
             background-color: #ff6600;
             color: white;
             padding: 14px 0;
@@ -74,7 +76,7 @@
             box-shadow: 0 2px 8px #ff660033;
             transition: background 0.2s;
         }
-        button[type="submit"]:hover { background-color: #e65c00; }
+        button[type="submit"]:hover { background-color: #e65c00; } */
         @media (max-width: 900px) {
             .checkout-container { flex-direction: column; gap: 24px; padding: 18px 4vw; }
         }
@@ -133,21 +135,20 @@
         </div>
         <div class="checkout-form">
             <h2>Dados para Entrega</h2>
-            <form id="formCheckout">
+            <form id="formCheckout" autocomplete="off">
                 <label for="morada">Morada de Entrega</label>
                 <textarea id="morada" name="morada" rows="2" required></textarea>
                 <label for="telefone">Telefone</label>
                 <input type="tel" id="telefone" name="telefone" required>
-                <button type="submit">Finalizar Pedido</button>
+                <!-- Removido o botão de submit -->
             </form>
+            <div id="paypal-button-container" style="margin-top: 24px;"></div>
         </div>
     </div>
     <footer>
         &copy; 2025 2beSeen - Todos os direitos reservados.
     </footer>
-    
 </body>
-<script src="https://js.stripe.com/v3/"></script>
 <script>
     function carregarCarrinho() {
         const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
@@ -170,41 +171,75 @@
     }
     carregarCarrinho();
 
-    document.getElementById("formCheckout").addEventListener("submit", async function(e) {
-        e.preventDefault();
-        const token = localStorage.getItem("jwtToken");
-        if (!token) {
-            alert("Por favor, faça login para continuar.");
-            window.location.href = "/login.html";
-            return;
-        }
+    // --- PayPal só disponível se formulário estiver válido ---
+    function isFormValido() {
+        const morada = document.getElementById("morada").value.trim();
+        const telefone = document.getElementById("telefone").value.trim();
+        return morada.length > 0 && telefone.length > 0;
+    }
 
-        // Recolhe dados do formulário
-        const morada = document.getElementById("morada").value;
-        const telefone = document.getElementById("telefone").value;
-        const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+    function renderPayPalButton() {
+        if (window.paypalButtonRendered) return; // Só renderiza uma vez
+        window.paypalButtonRendered = true;
+        paypal.Buttons({
+            createOrder: async function(data, actions) {
+                const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+                if (carrinho.length === 0) {
+                    alert("O carrinho está vazio. Adicione produtos antes de finalizar a compra.");
+                    return;
+                }
+                const resposta = await fetch("/api/paypal/create-order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ carrinho })
+                });
+                const dataRes = await resposta.json();
+                if (!dataRes.id) {
+                    alert("Erro ao criar ordem PayPal.");
+                    throw new Error("Erro ao criar ordem PayPal");
+                }
+                return dataRes.id; // ID da ordem PayPal
+            },
+            onApprove: async function(data, actions) {
+                const token = localStorage.getItem("jwtToken");
+                const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+                const morada = document.getElementById("morada").value;
+                const telefone = document.getElementById("telefone").value;
 
-        // Envia para o backend para criar sessão Stripe
-        try {
-            const resposta = await fetch("/api/stripe/checkout-session", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                   morada, telefone, carrinho, token
-                })
-            });
-            const data = await resposta.json();
-            if (data.url) {
-                window.location.href = data.url; // Redireciona para Stripe Checkout
-                localStorage.removeItem("carrinho");
-            
-            } else {
-                alert("Erro ao criar sessão de pagamento.");
+                // Chama o backend para capturar o pagamento
+                const resposta = await fetch("/api/paypal/capture-order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ orderID: data.orderID, carrinho, morada, telefone, token})
+                });
+                const dataRes = await resposta.json();
+                if (dataRes.status === "COMPLETED") {
+                    localStorage.removeItem("carrinho");
+                    window.location.href = "sucess_order.html";
+                } else {
+                    alert("Pagamento não foi concluído.");
+                }
             }
-        } catch (err) {
-            console.error("Erro ao processar pagamento:", err);
-            alert("Erro ao processar pagamento.");
+        }).render('#paypal-button-container');
+    }
+
+    function checkFormAndTogglePayPal() {
+        const container = document.getElementById("paypal-button-container");
+        if (isFormValido()) {
+            renderPayPalButton();
+            container.style.pointerEvents = "auto";
+            container.style.opacity = "1";
+        } else {
+            container.style.pointerEvents = "none";
+            container.style.opacity = "0.5";
         }
-    });
+    }
+
+    document.getElementById("morada").addEventListener("input", checkFormAndTogglePayPal);
+    document.getElementById("telefone").addEventListener("input", checkFormAndTogglePayPal);
+
+    // Inicialmente desativa o botão PayPal
+    document.getElementById("paypal-button-container").style.pointerEvents = "none";
+    document.getElementById("paypal-button-container").style.opacity = "0.5";
 </script>
 </html>

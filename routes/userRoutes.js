@@ -6,7 +6,7 @@ const authenticateToken = require('../middlewares/auth');
 router.post('/login', userController.login);
 router.post('/register', userController.register);
 
-
 router.get('/minhas', authenticateToken, userController.getProfile);
-
+router.post('/forgotPassword', userController.forgotPassword);
+router.post('/resetPassword', userController.resetPassword);
 module.exports = router;

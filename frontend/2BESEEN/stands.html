@@ -196,10 +196,12 @@ input[type="checkbox"] {
         <div class="header-actions">
             <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
             <a href="/login.html" class="login-button">Login</a>
-            <div id="perfilCliente" class="perfil-container" style="display:none !important;">
-                <span>Bem-vindo, <span id="nomeCliente"></span></span>
-                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                <button onclick="logout()" id="logoutBtn" class="logout-button" style="margin-left:8px;">Logout</button>
+            <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+                <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+                <div class="perfil-dropdown" id="perfilDropdown">
+                    <a href="perfilCliente.html" class="perfil-btn">Perfil</a>
+                    <button onclick="logout()" class="logout-button">Logout</button>
+                </div>
             </div>
         </div>
         
@@ -421,15 +423,15 @@ input[type="checkbox"] {
             }
         }
         function ajustarRenderAoTamanhoBase() {
-    const larguraPx = window.innerWidth;
-    const alturaPx = window.innerHeight;
-    const div = document.getElementById("stand3d");
-    div.style.width = larguraPx + "px";
-    div.style.height = alturaPx + "px";
-    renderer.setSize(larguraPx, alturaPx);
-    camera.aspect = larguraPx / alturaPx;
-    camera.updateProjectionMatrix();
-}
+            const larguraPx = window.innerWidth;
+            const alturaPx = window.innerHeight;
+            const div = document.getElementById("stand3d");
+            div.style.width = larguraPx + "px";
+            div.style.height = alturaPx + "px";
+            renderer.setSize(larguraPx, alturaPx);
+            camera.aspect = larguraPx / alturaPx;
+            camera.updateProjectionMatrix();
+        }
         window.addEventListener('resize', ajustarRenderAoTamanhoBase);
         function atualizarOpcoesBase() {
             const ilha = document.getElementById("ilhaCheckbox").checked;
