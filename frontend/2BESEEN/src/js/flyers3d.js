@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 let scene, camera, renderer, flyerMesh, flyerTexture = null;
 let deveRodar = false;
 
@@ -35,7 +35,7 @@ export function initFlyer3D() {
     document.getElementById("arquivo").addEventListener("change", onFileChange);
     document.getElementById("impressao").addEventListener("change", atualizarRotacao); // NOVO
     atualizarRotacao();
-} 
+}
 function atualizarRotacao() {
     const impressao = document.getElementById("impressao").value;
     deveRodar = (impressao === "frente verso");
@@ -44,7 +44,7 @@ function atualizarRotacao() {
 function criarFlyerMesh(largura, altura) {
     if (flyerMesh) scene.remove(flyerMesh);
     const geometry = new THREE.PlaneGeometry(largura, altura);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff,  side: THREE.DoubleSide  });
+    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, side: THREE.DoubleSide });
     flyerMesh = new THREE.Mesh(geometry, material);
     flyerMesh.rotation.x = 0;
     flyerMesh.rotation.z = 0;
@@ -56,7 +56,7 @@ function criarFlyerMesh(largura, altura) {
     flyerMesh.position.set(0, 0, 0);
     scene.add(flyerMesh);
 }
-    
+
 function atualizarTamanhoFlyer() {
     const tamanho = document.getElementById("tamanho").value;
     let largura, altura;

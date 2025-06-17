@@ -10,7 +10,8 @@ exports.createOrderRaw = async (orderData) => {
 // Criar encomenda
 exports.createOrder = async (req, res) => {
     try {
-        const newOrder = new Order({...req.body,
+        const newOrder = new Order({
+            ...req.body,
             userId: req.user.userId
         });
         await newOrder.save();
@@ -35,7 +36,7 @@ exports.listUserOrders = async (req, res) => {
     try {
         const userId = req.user.userId;
         console.log('userId recebido:', userId);
-        const orders = await Order.find({userId}).sort({ dataPedido: -1 });
+        const orders = await Order.find({ userId }).sort({ dataPedido: -1 });
         res.json(orders);
     } catch (err) {
         console.error(err);

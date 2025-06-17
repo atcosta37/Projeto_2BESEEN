@@ -1,4 +1,4 @@
-document.getElementById("formregister").addEventListener("submit", function(event) {
+document.getElementById("formregister").addEventListener("submit", function (event) {
     event.preventDefault();
 
     const dados = {
@@ -12,11 +12,11 @@ document.getElementById("formregister").addEventListener("submit", function(even
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
     })
-    .then(response => response.json())
-    .then(data =>{
-        if (data.redirectTo) {
-            window.location.href = data.redirectTo; 
-        }
-    })
-    .catch(error => console.error('Erro:', error));
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirectTo) {
+                window.location.href = data.redirectTo;
+            }
+        })
+        .catch(error => console.error('Erro:', error));
 });

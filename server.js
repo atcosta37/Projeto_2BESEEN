@@ -9,7 +9,7 @@ const fs = require('fs');
 
 dotenv.config();
 
-const authenticateToken  = require('./middlewares/auth');
+const authenticateToken = require('./middlewares/auth');
 const Order = require('./models/Order');
 const Message = require('./models/Message');
 const userRoutes = require('./routes/userRoutes');
@@ -34,7 +34,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 app.use(cors({
     origin: 'http://localhost:5173',
-    })
+})
 );
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -147,7 +147,7 @@ app.post('/api/contacto', async (req, res) => {
     }
     try {
         const novaMensagem = new Message({ nome, email, mensagem });
-        await novaMensagem.save();  
+        await novaMensagem.save();
         res.status(201).json({ mensagem: "Mensagem enviada com sucesso!" });
     } catch (err) {
         res.status(500).json({ mensagem: "Erro ao enviar mensagem." });
@@ -170,7 +170,7 @@ app.get('/api/admin/mensagens', authenticateToken, async (req, res) => {
 // Criar ordem PayPal
 app.post('/api/paypal/create-order', async (req, res) => {
     const { carrinho } = req.body;
-    
+
     if (!carrinho || !Array.isArray(carrinho) || !carrinho.length) {
         return res.status(400).json({ error: "Carrinho vazio ou inválido" });
     }
@@ -211,7 +211,7 @@ app.post('/api/paypal/capture-order', async (req, res) => {
         const userId = decoded.userId;
         const nomeCliente = decoded.nome || "";    // ou decoded.name, depende do teu payload
         const emailCliente = decoded.email || "";
-       for (const item of carrinho) {
+        for (const item of carrinho) {
             await Order.create({
                 userId,
                 // Comuns

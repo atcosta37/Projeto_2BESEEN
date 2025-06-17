@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 let scene, camera, renderer, cardMesh, cardTexture = null;
 let deveRodar = false;
 
@@ -23,7 +23,7 @@ export function initCartao3D() {
     camera.lookAt(0, 0, 0);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    
+
     animate();
 
     document.getElementById("tamanho").addEventListener("change", atualizarTamanhoCard);
@@ -40,7 +40,7 @@ function atualizarRotacao() {
 function criarCardMesh(largura, altura) {
     if (cardMesh) scene.remove(cardMesh);
     const geometry = new THREE.PlaneGeometry(largura, altura);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff,side: THREE.DoubleSide});
+    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, side: THREE.DoubleSide });
     cardMesh = new THREE.Mesh(geometry, material);
     cardMesh.rotation.x = 0;
     cardMesh.rotation.z = 0;

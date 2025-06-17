@@ -4,6 +4,7 @@
             margin: 0;
             padding: 0;
         }
+
         .produto-layout {
             display: flex;
             flex-wrap: wrap;
@@ -13,6 +14,7 @@
             align-items: flex-start;
             justify-content: center;
         }
+
         .coluna-esquerda {
             flex: 1;
             min-width: 320px;
@@ -21,6 +23,7 @@
             flex-direction: column;
             align-items: center;
         }
+
         #preview3d {
             width: 100%;
             height: 400px;
@@ -33,10 +36,12 @@
             justify-content: center;
             /* Garante que o canvas fica centrado */
         }
+
         #preview3d canvas {
             display: block;
             margin: 0 auto;
         }
+
         .coluna-direita {
             flex: 1;
             min-width: 320px;
@@ -49,12 +54,14 @@
             flex-direction: column;
             align-items: stretch;
         }
+
         .coluna-direita h2 {
             font-size: 1.6em;
             margin-bottom: 18px;
             color: #ff6600;
             text-align: left;
         }
+
         label {
             display: block;
             text-align: left;
@@ -62,7 +69,10 @@
             font-weight: bold;
             font-size: 15px;
         }
-        select, input[type="number"], input[type="file"] {
+
+        select,
+        input[type="number"],
+        input[type="file"] {
             width: 100%;
             padding: 11px;
             margin-top: 6px;
@@ -73,10 +83,14 @@
             transition: border 0.2s;
             box-sizing: border-box;
         }
-        select:focus, input[type="number"]:focus, input[type="file"]:focus {
+
+        select:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus {
             border: 2px solid #e65c00;
             outline: none;
         }
+
         button[type="submit"] {
             background-color: #ff6600;
             color: white;
@@ -95,9 +109,11 @@
             justify-content: center;
             gap: 8px;
         }
+
         button[type="submit"]:hover {
             background-color: #e65c00;
         }
+
         #precoEstimado {
             font-size: 1.15em;
             color: #e65c00;
@@ -105,30 +121,35 @@
             margin-top: 22px;
             margin-bottom: 0;
         }
+
         small {
             color: #555;
             display: block;
             margin-top: 5px;
             font-size: 13px;
         }
-footer {
-        background-color: #232526;
-        color: white;
-        padding: 14px 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        font-size: 1em;
-        letter-spacing: 0.5px;
-        z-index: 100;
-}
+
+        footer {
+            background-color: #232526;
+            color: white;
+            padding: 14px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            z-index: 100;
+        }
+
         @media (max-width: 900px) {
             .produto-layout {
                 flex-direction: column;
                 padding: 10px;
                 gap: 24px;
             }
-            .coluna-esquerda, .coluna-direita {
+
+            .coluna-esquerda,
+            .coluna-direita {
                 max-width: 100%;
             }
         }

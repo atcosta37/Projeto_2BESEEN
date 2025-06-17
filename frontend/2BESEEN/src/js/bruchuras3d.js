@@ -7,7 +7,7 @@ let deveRodar = false;
 export function initBrochura3D() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(45, 600 / 400, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true});
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(600, 400);
 
     const previewDiv = document.getElementById("preview3d");

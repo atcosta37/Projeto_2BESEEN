@@ -18,7 +18,7 @@ const orderSchema = new mongoose.Schema({
     arquivo: String,
     precoEstimado: Number,   // Para guardar o preço final
     dataPedido: { type: Date, default: Date.now },
-    tipoServico: { type: String, enum: ['impressao', 'grande formato','flyers','cartoes','brochura','Stand'], required: true },
+    tipoServico: { type: String, enum: ['impressao', 'grande formato', 'flyers', 'cartoes', 'brochura', 'Stand'], required: true },
     estado: { type: String, enum: ['pendente', 'em-processamento', 'concluido', 'enviado'], default: 'pendente' },
 
     // Campos específicos para Stand

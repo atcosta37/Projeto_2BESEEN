@@ -45,11 +45,11 @@ function renderizarCarrinho() {
     let precoTotal = 0;
 
     carrinho.forEach((item, index) => {
-        if(!item) return; // Verifica se o item é válido
+        if (!item) return; // Verifica se o item é válido
         const li = document.createElement("li");
         li.classList.add("carrinho-item");
 
-    
+
         const btnRemover = document.createElement("button");
         btnRemover.textContent = "✕";
         btnRemover.className = "remover-btn";
@@ -64,14 +64,14 @@ function renderizarCarrinho() {
         if (item.tipoServico === "Stand") {
             li.textContent = `Stand: ${item.baseLargura || ""}x${item.baseProfundidade || ""} | ${precoItem.toFixed(2)} €`;
         } else {
-            li.textContent = `${item.tipoServico ? item.tipoServico.charAt(0).toUpperCase() + item.tipoServico.slice(1) : "Pedido"}: ${item.quantidade}x ${item.formato || item.tamanho ||"" } - ${item.papel} | ${precoItem.toFixed(2)} €`;
+            li.textContent = `${item.tipoServico ? item.tipoServico.charAt(0).toUpperCase() + item.tipoServico.slice(1) : "Pedido"}: ${item.quantidade}x ${item.formato || item.tamanho || ""} - ${item.papel} | ${precoItem.toFixed(2)} €`;
         }
 
         li.appendChild(btnRemover);
         lista.appendChild(li);
     });
 
-    
+
     let totalDiv = document.getElementById("carrinhoTotal");
     if (!totalDiv) {
         totalDiv = document.createElement("div");

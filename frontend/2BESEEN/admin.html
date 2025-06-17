@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin - Encomendas</title>
@@ -11,130 +12,132 @@
 
     </style>
 </head>
+
 <body>
-<header>
-    <nav class="main-navbar">
-        <div class="logo-area">
-            <img src="/logo.png" alt="2beSeen" class="logo-img">
-            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
-        </div>
-        <div class="nav-links">
-            <a href="/index.html">Home</a>
-            <a href="/servicos.html">Serviços</a>
-            <a href="/portfolio.html">Portfólio</a>
-            <div class="dropdown">
-                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
-                <div id="submenu" class="submenu">
-                    <a href="oque-somos.html">O Que Somos</a>
-                    <a href="quem-somos.html">Quem Somos</a>
-                    <a href="equipa.html">A Equipa</a>
+    <header>
+        <nav class="main-navbar">
+            <div class="logo-area">
+                <img src="/logo.png" alt="2beSeen" class="logo-img">
+                <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/servicos.html">Serviços</a>
+                <a href="/portfolio.html">Portfólio</a>
+                <div class="dropdown">
+                    <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                    <div id="submenu" class="submenu">
+                        <a href="oque-somos.html">O Que Somos</a>
+                        <a href="quem-somos.html">Quem Somos</a>
+                        <a href="equipa.html">A Equipa</a>
+                    </div>
+                </div>
+                <a href="/contactos.html">Contactos</a>
+            </div>
+            <div class="header-actions">
+                <button onclick="logout()" class="logout-button" style="margin-left:8px;">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <button id="abrirInboxBtn" class="admin-btn">📥 Ver Inbox de Contacto</button>
+
+        <!-- Faturação em cima -->
+        <div class="admin-card">
+            <h2 class="admin-section-title">Faturação</h2>
+            <div class="faturacao-cards-row">
+                <div class="faturacao-card">
+                    <h3 style="margin-top:0; color:#ff6600;">Por mês</h3>
+                    <canvas id="faturacaoPorMes" height="180"></canvas>
+                </div>
+                <div class="faturacao-card">
+                    <h3 style="margin-top:0; color:#ff6600;">Por tipo de serviço</h3>
+                    <canvas id="faturacaoPorTipo" height="180"></canvas>
+                </div>
+                <div class="faturacao-card faturacao-total-card">
+                    <span class="faturacao-total-label">Total faturado</span>
+                    <span id="totalFaturado" class="faturacao-total-value">0 €</span>
                 </div>
             </div>
-            <a href="/contactos.html">Contactos</a>
         </div>
-        <div class="header-actions">
-            <button onclick="logout()" class="logout-button" style="margin-left:8px;">Logout</button>
+
+        <!-- Tabelas abaixo -->
+        <div class="admin-card">
+            <h2 class="admin-section-title">Painel do Administrador - Encomendas</h2>
+            <table id="tabelaEncomendas">
+                <thead>
+                    <tr>
+                        <th>Utilizador</th>
+                        <th>Email</th>
+                        <th>Tamanho</th>
+                        <th>Papel/Material</th>
+                        <th>Quantidade</th>
+                        <th>Arquivo</th>
+                        <th>Tipo de Serviço</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
-    </nav>
-</header>
 
-<div class="container">
-    <button id="abrirInboxBtn" class="admin-btn">📥 Ver Inbox de Contacto</button>
-
-    <!-- Faturação em cima -->
-    <div class="admin-card">
-        <h2 class="admin-section-title">Faturação</h2>
-        <div class="faturacao-cards-row">
-            <div class="faturacao-card">
-                <h3 style="margin-top:0; color:#ff6600;">Por mês</h3>
-                <canvas id="faturacaoPorMes" height="180"></canvas>
-            </div>
-            <div class="faturacao-card">
-                <h3 style="margin-top:0; color:#ff6600;">Por tipo de serviço</h3>
-                <canvas id="faturacaoPorTipo" height="180"></canvas>
-            </div>
-            <div class="faturacao-card faturacao-total-card">
-                <span class="faturacao-total-label">Total faturado</span>
-                <span id="totalFaturado" class="faturacao-total-value">0 €</span>
-            </div>
+        <div class="admin-card">
+            <h2 class="admin-section-title">Encomendas de Stands</h2>
+            <table id="tabelaStands">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Email</th>
+                        <th>Base (LxP)</th>
+                        <th>Cadeiras</th>
+                        <th>Mesas</th>
+                        <th>Paredes</th>
+                        <th>Preço</th>
+                        <th>Imagem</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Tabelas abaixo -->
-    <div class="admin-card">
-        <h2 class="admin-section-title">Painel do Administrador - Encomendas</h2>
-        <table id="tabelaEncomendas">
-            <thead>
-                <tr>
-                    <th>Utilizador</th>
-                    <th>Email</th>
-                    <th>Tamanho</th>
-                    <th>Papel/Material</th>
-                    <th>Quantidade</th>
-                    <th>Arquivo</th>
-                    <th>Tipo de Serviço</th>
-                    <th>Data</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+    <!-- Modal detalhes encomenda -->
+    <div id="modalDetalhesEncomenda" class="modal-inbox">
+        <div class="modal-inbox-content">
+            <span class="close-inbox" id="fecharDetalhesBtn">&times;</span>
+            <h2>Detalhes da Encomenda</h2>
+            <div id="detalhesEncomendaConteudo" class="detalhes-flex"></div>
+        </div>
     </div>
 
-    <div class="admin-card">
-        <h2 class="admin-section-title">Encomendas de Stands</h2>
-        <table id="tabelaStands">
-            <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Email</th>
-                    <th>Base (LxP)</th>
-                    <th>Cadeiras</th>
-                    <th>Mesas</th>
-                    <th>Paredes</th>
-                    <th>Preço</th>
-                    <th>Imagem</th>
-                    <th>Data</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+    <div id="modalInbox" class="modal-inbox">
+        <div class="modal-inbox-content">
+            <span class="close-inbox" id="fecharInboxBtn">&times;</span>
+            <h2>Inbox - Mensagens de Contacto</h2>
+            <table id="tabelaMensagens">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<!-- Modal detalhes encomenda -->
-<div id="modalDetalhesEncomenda" class="modal-inbox">
-    <div class="modal-inbox-content">
-        <span class="close-inbox" id="fecharDetalhesBtn">&times;</span>
-        <h2>Detalhes da Encomenda</h2>
-        <div id="detalhesEncomendaConteudo" class="detalhes-flex"></div>
-    </div>
-</div>
-
-<div id="modalInbox" class="modal-inbox">
-    <div class="modal-inbox-content">
-        <span class="close-inbox" id="fecharInboxBtn">&times;</span>
-        <h2>Inbox - Mensagens de Contacto</h2>
-        <table id="tabelaMensagens">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Mensagem</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-</div>
-
-<footer>
-    &copy; 2025 2beSeen - Todos os direitos reservados.
-</footer>
-<script src="src/js/header.js"></script>
-<script src="src/js/carrinho.js"></script>
-<script src="src/js/admin.js"></script>
+    <footer>
+        &copy; 2025 2beSeen - Todos os direitos reservados.
+    </footer>
+    <script src="src/js/header.js"></script>
+    <script src="src/js/carrinho.js"></script>
+    <script src="src/js/admin.js"></script>
 </body>
+
 </html>

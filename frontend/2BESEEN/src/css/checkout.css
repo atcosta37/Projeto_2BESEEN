@@ -1,49 +1,71 @@
-        body { background: #f4f4f4; margin: 0; font-family: Arial, sans-serif; }
+        body {
+            background: #f4f4f4;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
         .checkout-container {
             max-width: 900px;
             margin: 48px auto 40px auto;
             background: #fff;
             border-radius: 14px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
             padding: 38px 32px 32px 32px;
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
         }
+
         .checkout-resumo {
             flex: 1;
             min-width: 320px;
         }
+
         .checkout-form {
             flex: 1;
             min-width: 320px;
         }
-        h2 { color: #ff6600; margin-top: 0; }
+
+        h2 {
+            color: #ff6600;
+            margin-top: 0;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 18px;
             background: #fff;
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px 8px;
             border-bottom: 1px solid #eee;
             text-align: left;
         }
-        th { background: #f7f7f7; color: #232526; }
+
+        th {
+            background: #f7f7f7;
+            color: #232526;
+        }
+
         .total {
             font-weight: bold;
             color: #e65c00;
             text-align: right;
             font-size: 1.1em;
         }
+
         label {
             display: block;
             margin-top: 14px;
             font-weight: 600;
             color: #232526;
         }
-        input, textarea {
+
+        input,
+        textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -53,10 +75,15 @@
             background-color: #fff7f0;
             box-sizing: border-box;
         }
-        
+
         @media (max-width: 900px) {
-            .checkout-container { flex-direction: column; gap: 24px; padding: 18px 4vw; }
+            .checkout-container {
+                flex-direction: column;
+                gap: 24px;
+                padding: 18px 4vw;
+            }
         }
+
         footer {
             background-color: #232526;
             color: white;

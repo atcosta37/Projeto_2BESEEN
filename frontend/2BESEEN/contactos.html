@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,90 +9,97 @@
     <link rel="stylesheet" href="src/css/carrinho.css">
     <title>Contactos | 2beSeen</title>
 </head>
+
 <body>
     <header>
-    <nav class="main-navbar">
-        <div class="logo-area">
-            <img src="/logo.png" alt="2beSeen" class="logo-img">
-            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
-        </div>
-        <div class="nav-links">
-            <a href="/index.html">Home</a>
-            <a href="/servicos.html">Serviços</a>
-            <a href="/portfolio.html">Portfólio</a>
-            <div class="dropdown">
-                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
-                <div id="submenu" class="submenu">
-                    <a href="oque-somos.html">O Que Somos</a>
-                    <a href="quem-somos.html">Quem Somos</a>
-                    <a href="equipa.html">A Equipa</a>
+        <nav class="main-navbar">
+            <div class="logo-area">
+                <img src="/logo.png" alt="2beSeen" class="logo-img">
+                <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/servicos.html">Serviços</a>
+                <a href="/portfolio.html">Portfólio</a>
+                <div class="dropdown">
+                    <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                    <div id="submenu" class="submenu">
+                        <a href="oque-somos.html">O Que Somos</a>
+                        <a href="quem-somos.html">Quem Somos</a>
+                        <a href="equipa.html">A Equipa</a>
+                    </div>
                 </div>
+                <a href="/contactos.html">Contactos</a>
             </div>
-            <a href="/contactos.html">Contactos</a>
-        </div>
-        <div class="header-actions">
-            <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
-            <a href="/login.html" class="login-button">Login</a>
-            <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
-            <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
-            <div class="perfil-dropdown" id="perfilDropdown">
-                <a href="perfilCliente.html" class="perfil-btn">Perfil</a>
-                <button onclick="logout()" class="logout-button">Logout</button>
+            <div class="header-actions">
+                <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+                <a href="/login.html" class="login-button">Login</a>
+                <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+                    <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+                    <div class="perfil-dropdown" id="perfilDropdown">
+                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()" class="logout-button">Logout</button>
+                    </div>
+                </div>
+
+        </nav>
+        <div id="carrinhoContainer" class="carrinho-container">
+            <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar"
+                style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+            <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+                <span style="font-size:1.2em;">🛒</span> Carrinho
+            </h3>
+            <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+            <div id="carrinhoTotal"
+                style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+            <button onclick="confirmarPedido()" class="carrinho-confirmar"
+                style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar
+                Pedido</button>
+            <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+                <span style="font-size:2em;">🛍️</span><br>
+                O seu carrinho está vazio.
             </div>
         </div>
-        
-    </nav>
-       <div id="carrinhoContainer" class="carrinho-container">
-    <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar" style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
-    <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
-        <span style="font-size:1.2em;">🛒</span> Carrinho
-    </h3>
-    <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
-    <div id="carrinhoTotal" style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
-    <button onclick="confirmarPedido()" class="carrinho-confirmar" style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar Pedido</button>
-    <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
-        <span style="font-size:2em;">🛍️</span><br>
-        O seu carrinho está vazio.
-    </div>
-</div>
-</header>
+    </header>
     <div class="container">
         <h1>Contactos</h1>
         <div class="contact-info">
             <div class="contact-details">
                 <p><strong>Morada:</strong><br>
-                Rua Exemplo, nº 123<br>
-                1000-000 Porto</p>
+                    Rua Exemplo, nº 123<br>
+                    1000-000 Porto</p>
                 <p><strong>Telefone:</strong><br>
-                <a href="tel:+351210000000" style="color:#222;">+351 210 000 000</a></p>
+                    <a href="tel:+351210000000" style="color:#222;">+351 210 000 000</a>
+                </p>
                 <p><strong>Email:</strong><br>
-                <a href="mailto:geral@2beseen.pt" style="color:#222;">geral@2beseen.pt</a></p>
+                    <a href="mailto:geral@2beseen.pt" style="color:#222;">geral@2beseen.pt</a>
+                </p>
                 <p><strong>Horário:</strong><br>
-                Segunda a Sexta, 9h - 18h</p>
+                    Segunda a Sexta, 9h - 18h</p>
             </div>
             <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps?q=Porto,Portugal&output=embed"
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                <iframe src="https://www.google.com/maps?q=Porto,Portugal&output=embed" width="100%" height="100%"
+                    style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
     <div class="contact-form">
-    <h2>Envie-nos uma mensagem</h2>
-    <form id="formContacto" autocomplete="off">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <h2>Envie-nos uma mensagem</h2>
+        <form id="formContacto" autocomplete="off">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="mensagem">Mensagem:</label>
-        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
 
-        <button type="submit">Enviar</button>
-        <div id="mensagemSucesso" style="color:green;display:none;margin-top:10px;">Mensagem enviada com sucesso!</div>
-    </form>
+            <button type="submit">Enviar</button>
+            <div id="mensagemSucesso" style="color:green;display:none;margin-top:10px;">Mensagem enviada com sucesso!
+            </div>
+        </form>
     </div>
     <footer>
         &copy; 2025 2beSeen - Todos os direitos reservados.
@@ -100,4 +108,5 @@
 <script src="src/js/global.js"></script>
 <script src="src/js/carrinho.js"></script>
 <script src="src/js/contactos.js"></script>
+
 </html>

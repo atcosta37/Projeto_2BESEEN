@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -15,11 +16,12 @@ body, html {
     flex-direction: row;
     background: none;
 }
+
 .sidebar-controles {
     width: 320px;
     min-width: 220px;
     max-width: 350px;
-    background: rgba(30,34,40,0.96);
+    background: rgba(30, 34, 40, 0.96);
     box-shadow: 4px 0 32px 0 #ff660033, 0 0 0 1.5px #ff6600;
     border-radius: 0 24px 24px 0;
     padding: 38px 28px 28px 28px;
@@ -29,17 +31,20 @@ body, html {
     z-index: 10;
     position: relative;
 }
+
 .menu-objetos {
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
+
 .menu-objetos span {
     font-size: 1.1rem;
     color: #ff6600;
     letter-spacing: 1px;
     margin-bottom: 8px;
 }
+
 .menu-objetos button {
     background: linear-gradient(90deg, #ff6600 0%, #e65c00 100%);
     color: #232526;
@@ -55,24 +60,29 @@ body, html {
     outline: none;
     margin-bottom: 6px;
 }
+
 .menu-objetos button:hover {
     background: linear-gradient(90deg, #e65c00 0%, #ff6600 100%);
     color: #fff;
     box-shadow: 0 4px 24px 0 #ff6600cc;
 }
+
 .controlo-stand {
     margin-top: 18px;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
 .controlo-stand label {
     color: #ff6600;
     font-weight: 500;
     font-size: 1.05rem;
     margin-bottom: 4px;
 }
-select, input[type="checkbox"] {
+
+select,
+input[type="checkbox"] {
     background: #232526;
     color: #ff6600;
     border: 1.5px solid #ff6600;
@@ -85,10 +95,13 @@ select, input[type="checkbox"] {
     transition: border 0.2s, box-shadow 0.2s;
     margin-top: 4px;
 }
-select:focus, input[type="checkbox"]:focus {
+
+select:focus,
+input[type="checkbox"]:focus {
     border: 1.5px solid #e65c00;
     box-shadow: 0 2px 12px 0 #e65c0044;
 }
+
 input[type="checkbox"] {
     accent-color: #ff6600;
     width: 18px;
@@ -96,16 +109,18 @@ input[type="checkbox"] {
     vertical-align: middle;
     margin-right: 8px;
 }
+
 .legend {
     margin-top: 32px;
     font-size: 1.1rem;
     color: #fff3e0;
-    background: rgba(30,34,40,0.92);
+    background: rgba(30, 34, 40, 0.92);
     border-radius: 14px;
     padding: 12px 18px;
     box-shadow: 0 2px 16px 0 #ff660044;
     border: none;
 }
+
 #stand3d {
     flex: 1;
     width: 100vw;
@@ -117,6 +132,7 @@ input[type="checkbox"] {
     position: relative;
     z-index: 1;
 }
+
 #stand3d canvas {
     display: block;
     width: 100vw !important;
@@ -126,39 +142,43 @@ input[type="checkbox"] {
     box-shadow: 0 0 60px 0 #ff660080, 0 0 0 2px #222;
     background: transparent;
 }
+
 @media (max-width: 900px) {
     .layout {
         flex-direction: column;
     }
+
     .sidebar-controles {
-    width: 320px;
-    min-width: 220px;
-    max-width: 350px;
-    background: rgba(30,34,40,0.96);
-    box-shadow: 4px 0 32px 0 #ff660033, 0 0 0 1.5px #ff6600;
-    border-radius: 0 24px 24px 0;
-    padding: 38px 28px 28px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    z-index: 10;
-    position: relative;
-    height: auto;       
-    overflow: visible; 
+        width: 320px;
+        min-width: 220px;
+        max-width: 350px;
+        background: rgba(30, 34, 40, 0.96);
+        box-shadow: 4px 0 32px 0 #ff660033, 0 0 0 1.5px #ff6600;
+        border-radius: 0 24px 24px 0;
+        padding: 38px 28px 28px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        z-index: 10;
+        position: relative;
+        height: auto;
+        overflow: visible;
     }
+
     #stand3d {
         height: 70vh;
     }
-   #painelPersonalizacao {
-    background: #232526;
-    border: 1px solid #ff6600;
-    border-radius: 14px;
-    margin: 24px auto 0 auto;
-    padding: 18px 28px;
-    color: #fff3e0;
-    box-shadow: 0 2px 16px 0 #ff660044;
-    max-width: 400px;
-    display: none;
-    position: static;
+
+    #painelPersonalizacao {
+        background: #232526;
+        border: 1px solid #ff6600;
+        border-radius: 14px;
+        margin: 24px auto 0 auto;
+        padding: 18px 28px;
+        color: #fff3e0;
+        box-shadow: 0 2px 16px 0 #ff660044;
+        max-width: 400px;
+        display: none;
+        position: static;
     }
 }

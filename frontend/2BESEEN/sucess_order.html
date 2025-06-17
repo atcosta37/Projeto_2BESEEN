@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <title>Encomenda Realizada</title>
     <link rel="stylesheet" href="src/css/sucess_order.css">
 </head>
+
 <body>
     <div class="sucesso-container">
         <h1>Obrigado pela sua encomenda!</h1>
@@ -15,10 +17,11 @@
         &copy; 2025 2beSeen - Todos os direitos reservados.
     </footer>
     <script>
-    window.addEventListener("DOMContentLoaded", function() {
-        localStorage.removeItem("carrinho");
-        document.getElementById("mensagem").textContent = "A sua encomenda foi registada com sucesso!";
-    });
+        window.addEventListener("DOMContentLoaded", function () {
+            localStorage.removeItem("carrinho");
+            document.getElementById("mensagem").textContent = "A sua encomenda foi registada com sucesso!";
+        });
     </script>
 </body>
+
 </html>

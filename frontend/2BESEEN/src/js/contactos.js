@@ -1,4 +1,4 @@
- document.getElementById("formContacto").addEventListener("submit", async function(e) {
+document.getElementById("formContacto").addEventListener("submit", async function (e) {
     e.preventDefault();
     const nome = document.getElementById("nome").value;
     const email = document.getElementById("email").value;

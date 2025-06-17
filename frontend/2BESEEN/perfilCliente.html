@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="src/css/header.css">
@@ -7,101 +8,129 @@
     <link rel="stylesheet" href="src/css/perfilCliente.css">
     <title>Perfil do Cliente</title>
 </head>
+
 <body>
-<header>
-    <nav class="main-navbar">
-        <div class="logo-area">
-            <img src="/logo.png" alt="2beSeen" class="logo-img">
-            <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
-        </div>
-        <div class="nav-links">
-            <a href="/index.html">Home</a>
-            <a href="/servicos.html">Serviços</a>
-            <a href="/portfolio.html">Portfólio</a>
-            <div class="dropdown">
-                <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
-                <div id="submenu" class="submenu">
-                    <a href="oque-somos.html">O Que Somos</a>
-                    <a href="quem-somos.html">Quem Somos</a>
-                    <a href="equipa.html">A Equipa</a>
+    <header>
+        <nav class="main-navbar">
+            <div class="logo-area">
+                <img src="/logo.png" alt="2beSeen" class="logo-img">
+                <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/servicos.html">Serviços</a>
+                <a href="/portfolio.html">Portfólio</a>
+                <div class="dropdown">
+                    <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                    <div id="submenu" class="submenu">
+                        <a href="oque-somos.html">O Que Somos</a>
+                        <a href="quem-somos.html">Quem Somos</a>
+                        <a href="equipa.html">A Equipa</a>
+                    </div>
                 </div>
+                <a href="/contactos.html">Contactos</a>
             </div>
-            <a href="/contactos.html">Contactos</a>
-        </div>
-        <div class="header-actions">
-            <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
-            <a href="/login.html" class="login-button">Login</a>
-            <div id="perfilCliente" class="perfil-container">
-                <span>Bem-vindo, <span id="nomeCliente"></span></span>
-                <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+            <div class="header-actions">
+                <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+                <a href="/login.html" class="login-button">Login</a>
+                <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+                    <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+                    <div class="perfil-dropdown" id="perfilDropdown">
+                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()" class="logout-button">Logout</button>
+                    </div>
+                </div>
+                <button class="openbtn" onclick="toggleMenu()">&#9776;</button>
             </div>
-        </div>
-        <button class="openbtn" onclick="toggleMenu()">&#9776;</button>
-    </nav>
-    <div id="carrinhoContainer" class="carrinho-container">
-        <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar" style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
-        <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
-            <span style="font-size:1.2em;">🛒</span> Carrinho
-        </h3>
-        <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
-        <div id="carrinhoTotal" style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
-        <button onclick="confirmarPedido()" class="carrinho-confirmar" style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar Pedido</button>
-        <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
-            <span style="font-size:2em;">🛍️</span><br>
-            O seu carrinho está vazio.
-        </div>
-    </div>
-</header>
-<main>
-    <div class="perfil-flex">
-    <!-- Substitui apenas o conteúdo de .perfil-dados -->
-        <div class="perfil-dados">
-            <h2 style="color:#ff6600; margin-bottom:24px;">Perfil do Cliente</h2>
-            <div class="dados-pessoais-simples">
-                <div class="dados-label">Nome:</div>
-                <div class="dados-valor" id="perfilNomeCliente"></div>
-                <div class="dados-label">Email:</div>
-                <div class="dados-valor" id="perfilEmailCliente"></div>
-            </div>
-            <div class="dados-botoes">
-                <button onclick="editarDados()">Editar Dados</button>
-                <button onclick="logout()">Logout</button>
+        </nav>
+        <div id="carrinhoContainer" class="carrinho-container">
+            <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar"
+                style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+            <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+                <span style="font-size:1.2em;">🛒</span> Carrinho
+            </h3>
+            <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+            <div id="carrinhoTotal"
+                style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+            <button onclick="confirmarPedido()" class="carrinho-confirmar"
+                style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar
+                Pedido</button>
+            <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+                <span style="font-size:2em;">🛍️</span><br>
+                O seu carrinho está vazio.
             </div>
         </div>
-        <div class="perfil-encomendas">
-            <h3>As minhas encomendas</h3>
-            <table id="tabelaEncomendas">
-                <thead>
-                    <tr>
-                        <th>Tamanho</th>
-                        <th>Papel/Material</th>
-                        <th>Quantidade</th>
-                        <th>Arquivo</th>
-                        <th>Tipo de Serviço</th>
-                        <th>Data</th>
-                        <th>Estado</th>
-                        <th>Detalhes</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+    </header>
+    <main>
+        <div class="perfil-flex">
+            <aside class="perfil-dados">
+                <h2 style="color:#ff6600; margin-bottom:24px;">Perfil do Cliente</h2>
+                <div class="dados-pessoais-simples">
+                    <div class="dados-label">Nome:</div>
+                    <div class="dados-valor" id="perfilNomeCliente"></div>
+                    <div class="dados-label">Email:</div>
+                    <div class="dados-valor" id="perfilEmailCliente"></div>
+                </div>
+                <div class="dados-botoes">
+                    <button onclick="editarDados()">Editar Dados</button>
+                    <button onclick="logout()">Logout</button>
+                </div>
+            </aside>
+            <section class="perfil-encomendas-wrapper">
+                <div class="perfil-encomendas">
+                    <h3>As minhas encomendas</h3>
+                    <table id="tabelaEncomendas">
+                        <thead>
+                            <tr>
+                                <th>Tamanho</th>
+                                <th>Papel/Material</th>
+                                <th>Quantidade</th>
+                                <th>Arquivo</th>
+                                <th>Tipo de Serviço</th>
+                                <th>Data</th>
+                                <th>Estado</th>
+                                <th>Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="perfil-encomendas" id="encomendasStandsBox" style="display:none;">
+                    <h3>Os meus Stands</h3>
+                    <table id="tabelaStands">
+                        <thead>
+                            <tr>
+                                <th>Tamanho</th>
+                                <th>Paredes</th>
+                                <th>Cadeiras</th>
+                                <th>Mesas</th>
+                                <th>Preço</th>
+                                <th>Data</th>
+                                <th>Estado</th>
+                                <th>Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    </div>
-    <!-- Modal para detalhes da encomenda -->
-    <div id="detalhesModal">
-        <div class="modal-content">
-            <span class="close" onclick="fecharModal()">&times;</span>
-            <h4>Detalhes da Encomenda</h4>
-            <div id="detalhesConteudo"></div>
+        <!-- Modal para detalhes da encomenda -->
+        <div id="detalhesModal">
+            <div class="modal-content">
+                <span class="close" onclick="fecharModal()">&times;</span>
+                <h4>Detalhes da Encomenda</h4>
+                <div id="detalhesConteudo"></div>
+            </div>
         </div>
-    </div>
-</main>
-<footer>
-    &copy; 2025 2beSeen - Todos os direitos reservados.
-</footer>
-<script src="src/js/global.js"></script>
-<script src="src/js/header.js"></script>
-<script src="src/js/carrinho.js"></script>
-<script src="src/js/perfilCliente.js"></script>
+    </main>
+    <footer>
+        &copy; 2025 2beSeen - Todos os direitos reservados.
+    </footer>
+    <script src="src/js/global.js"></script>
+    <script src="src/js/header.js"></script>
+    <script src="src/js/carrinho.js"></script>
+    <script src="src/js/perfilCliente.js"></script>
 </body>
+
 </html>

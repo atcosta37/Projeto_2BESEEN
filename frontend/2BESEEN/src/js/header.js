@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("jwtToken");
     if (token) {
         const payload = JSON.parse(atob(token.split(".")[1]));
-        document.getElementById("nomeCliente").textContent = payload.nome; 
+        document.getElementById("nomeCliente").textContent = payload.nome;
         document.getElementById("perfilCliente").style.display = "flex";
-        const loginBtn = document.querySelector(".login-button");   
+        const loginBtn = document.querySelector(".login-button");
         if (loginBtn) loginBtn.style.display = "none";
-        if(payload.isAdmin === true) {
+        if (payload.isAdmin === true) {
             const perfilBtn = document.getElementById("perfilBtn");
             if (perfilBtn) perfilBtn.href = "/admin.html";
         }
-    }else {
+    } else {
         if (perfilClienteElem) perfilClienteElem.style.display = "none";
         if (loginBtn) loginBtn.style.display = "inline-block";
         if (logoutBtn) logoutBtn.style.display = "none";
@@ -18,10 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 function logout() {
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("carrinho");
     window.location.href = "/login";
 }
 
- function toggleMenu() {
+function toggleMenu() {
     let sidebar = document.getElementById("sidebar");
     if (sidebar.style.width === "250px") {
         sidebar.style.width = "0";

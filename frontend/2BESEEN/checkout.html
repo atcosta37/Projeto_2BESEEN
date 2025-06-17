@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <title>Checkout | 2beSeen</title>
     <link rel="stylesheet" href="src/css/header.css">
     <link rel="stylesheet" href="src/css/checkout.css">
-    <script src="https://www.paypal.com/sdk/js?client-id=AULGRKdaT0M05UDzALmTMzUF_W_wlArHNWs1DLNdkk2qR7AtOBCGHfORPwV8XZ8qN8_qcDBwyud1kZj1&currency=EUR"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AULGRKdaT0M05UDzALmTMzUF_W_wlArHNWs1DLNdkk2qR7AtOBCGHfORPwV8XZ8qN8_qcDBwyud1kZj1&currency=EUR"></script>
     <style>
 
     </style>
 </head>
+
 <body>
     <header>
         <nav class="main-navbar">
@@ -31,6 +34,15 @@
                 </div>
                 <a href="/contactos.html">Contactos</a>
             </div>
+            <div class="header-actions">
+                <a href="/login.html" class="login-button">Login</a>
+                <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+                    <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+                    <div class="perfil-dropdown" id="perfilDropdown">
+                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()" class="logout-button">Logout</button>
+                    </div>
+                </div>
         </nav>
     </header>
     <div class="checkout-container">
@@ -67,4 +79,5 @@
     </footer>
 </body>
 <script src="src/js/checkout.js"></script>
+
 </html>

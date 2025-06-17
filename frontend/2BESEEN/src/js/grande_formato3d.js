@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-let scene, camera, renderer, formatoMesh, formatoTexture= null;
+let scene, camera, renderer, formatoMesh, formatoTexture = null;
 
 export function initGrandeFormato3D() {
     // Inicializar cena apenas uma vez
@@ -20,7 +20,7 @@ export function initGrandeFormato3D() {
     scene.add(light);
 
     criarFormatoMesh();
-    
+
     camera.position.set(0, 0, 3);
     camera.lookAt(0, 0, 0);
 
@@ -42,11 +42,11 @@ function criarFormatoMesh() {
     const geometry = new THREE.PlaneGeometry(largura, altura);
     let material;
     if (formatoTexture) {
-        material = new THREE.MeshStandardMaterial({ map: formatoTexture});
+        material = new THREE.MeshStandardMaterial({ map: formatoTexture });
     } else {
         material = new THREE.MeshStandardMaterial({ color: 0xffffff });
     }
-    
+
     formatoMesh = new THREE.Mesh(geometry, material);
     scene.add(formatoMesh);
 }
