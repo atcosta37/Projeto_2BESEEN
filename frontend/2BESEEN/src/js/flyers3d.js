@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 let scene, camera, renderer, flyerMesh, flyerTexture = null;
 let deveRodar = false;
 
@@ -25,6 +25,9 @@ export function initFlyer3D() {
 
     camera.position.set(0, 0, 5);
     camera.lookAt(0, 0, 0);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
     animate();
 
     // Eventos

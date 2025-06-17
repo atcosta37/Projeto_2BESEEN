@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 let scene, camera, renderer, cardMesh, cardTexture = null;
 let deveRodar = false;
 
@@ -20,6 +21,9 @@ export function initCartao3D() {
 
     camera.position.set(0, 0, 4); // x=0, y=0, z=4
     camera.lookAt(0, 0, 0);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    
     animate();
 
     document.getElementById("tamanho").addEventListener("change", atualizarTamanhoCard);

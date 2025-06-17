@@ -1,0 +1,168 @@
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px 100px 24px;
+        }
+        .admin-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px #ff660022;
+            padding: 32px 24px 28px 24px;
+            margin-bottom: 36px;
+            transition: box-shadow 0.2s;
+        }
+        .admin-card:hover {
+            box-shadow: 0 8px 32px #ff660044;
+        }
+        .admin-section-title {
+            color: #ff6600;
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px #ff660012;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #eee;
+            text-align: left;
+        }
+        th {
+            background-color: #fff7f0;
+            color: #232526;
+        }
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+        .modal-inbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.45);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-inbox-content {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 95vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            position: relative;
+        }
+        .close-inbox {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-size: 2rem;
+            color: #333;
+            cursor: pointer;
+        }
+        #tabelaStands img {
+            box-shadow: 0 2px 8px #0002;
+            background: #fafafa;
+        }
+        .admin-btn {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px #ff660033;
+            transition: background 0.2s;
+        }
+        .admin-btn:hover {
+            background: #e65c00;
+        }
+        .faturacao-cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            align-items: flex-start;
+        }
+        .faturacao-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px #ff660012;
+            padding: 24px 18px 18px 18px;
+            min-width: 260px;
+            flex: 1;
+            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .faturacao-total-card {
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .faturacao-total-label {
+            font-size: 1.1em;
+            color: #888;
+        }
+        .faturacao-total-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #ff6600;
+            margin-top: 8px;
+        }
+        @media (max-width: 900px) {
+            .container { padding: 40px 4vw 100px 4vw; }
+            table { font-size: 0.95em; }
+            .faturacao-cards-row { flex-direction: column; gap: 18px; }
+        }
+        /* Modal detalhes encomenda extra */
+        #modalDetalhesEncomenda {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.45);
+            justify-content: center;
+            align-items: center;
+        }
+        #modalDetalhesEncomenda .modal-inbox-content {
+            max-width: 700px;
+        }
+        /* Estilo para separar colunas no modal */
+        .detalhes-flex {
+            display: flex;
+            gap: 36px;
+            flex-wrap: wrap;
+        }
+        .detalhes-col {
+            min-width: 220px;
+            flex: 1 1 220px;
+        }
+        .detalhes-col h3 {
+            color: #ff6600;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 700px) {
+            .detalhes-flex { flex-direction: column; gap: 18px; }
+        }

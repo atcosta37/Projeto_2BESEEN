@@ -5,88 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="src/css/header.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .register-container {
-            max-width: 350px;
-            margin: 60px auto 0 auto;
-            padding: 32px 28px 24px 28px;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 32px #ff660022;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 0.7s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(40px);}
-            to   { opacity: 1; transform: translateY(0);}
-        }
-        .register-container h2 {
-            margin-bottom: 18px;
-            font-size: 2em;
-            color: #232526;
-            letter-spacing: 1px;
-        }
-        #formregister {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 10px;
-        }
-        #formregister input {
-            width: 100%;
-            margin: 0;
-            padding: 12px;
-            border: 1.5px solid #ff6600;
-            border-radius: 7px;
-            font-size: 1em;
-            background: #fff7f0;
-            transition: border 0.2s;
-            box-sizing: border-box;
-        }
-        #formregister input:focus {
-            border: 2px solid #e65c00;
-            outline: none;
-        }
-        #formregister button {
-            width: 100%;
-            height: 44px;
-            margin-top: 10px;
-            background-color: #ff6600;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1em;
-            cursor: pointer;
-            box-shadow: 0 2px 8px #ff660033;
-            transition: background 0.2s;
-        }
-        #formregister button:hover {
-            background-color: #e65c00;
-        }
-        .register-links {
-            margin-top: 18px;
-            font-size: 1em;
-        }
-        .register-links a {
-            color: #ff6600;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .register-links a:hover {
-            color: #e65c00;
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="src/css/register.css">
 </head>
 <header>
     <nav class="main-navbar">
@@ -150,28 +69,5 @@
 </body>
 <script src="src/js/header.js"></script>
 <script src="src/js/carrinho.js"></script>
-<script>
-    document.getElementById("formregister").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const dados = {
-        nome: document.getElementById("nome").value,
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value
-    };
-
-    fetch('/api/users/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-    })
-    .then(response => response.json())
-    .then(data =>{
-        if (data.redirectTo) {
-            window.location.href = data.redirectTo; 
-        }
-    })
-    .catch(error => console.error('Erro:', error));
-});
-</script>
+<script src="src/js/register.js"></script>
 </html>

@@ -1,0 +1,159 @@
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+.perfil-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    margin: 48px auto 40px auto;
+    max-width: 1200px;
+}
+
+.perfil-dados {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    padding: 38px 32px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.perfil-encomendas {
+    flex: 1;
+    min-width: 1000px;      /* aumenta aqui */
+    max-width: 900px; 
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    padding: 38px 32px 32px 32px;
+    overflow-x: auto;
+}
+        .perfil-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+        .perfil-header h2 {
+            margin: 0;
+            color: #ff6600;
+            font-size: 2em;
+        }
+       .dados-pessoais-simples {
+    width: 100%;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.dados-label {
+    font-weight: 600;
+    color: #232526;
+    font-size: 1.05em;
+}
+.dados-valor {
+    color: #444;
+    margin-bottom: 6px;
+    font-size: 1.05em;
+    word-break: break-all;
+}
+.dados-botoes {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+.dados-botoes button {
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.dados-botoes button:hover { background: #e65c00; }
+        table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px #ff660012;
+}
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        th {
+            background: #f7f7f7;
+            color: #232526;
+            font-weight: 600;
+        }
+        .estado-pendente { color: #ff9800; }
+        .estado-em-processamento { color: #2196f3; }
+        .estado-concluido { color: #4caf50; }
+        .estado-enviado { color: #9c27b0; }
+        .detalhes-btn {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.2s;
+        }
+        .detalhes-btn:hover { background: #e65c00; }
+        #detalhesModal {
+            display: none;
+            position: fixed;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1000;
+        }
+        #detalhesModal .modal-content {
+            background: #fff;
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 24px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 24px #ff660044;
+        }
+        #detalhesModal .close {
+            position: absolute;
+            right: 16px;
+            top: 12px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        @media (max-width: 700px) {
+            .perfil-flex {
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+                margin: 24px 0;
+            }
+            .perfil-dados, .perfil-encomendas {
+                max-width: 100%;
+                width: 100%;
+                padding: 24px 8vw;
+            }
+        }
+        footer {
+            background-color: #232526;
+            color: white;
+            padding: 14px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            z-index: 100;
+        }
