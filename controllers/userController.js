@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 exports.login = async (req, res) => {
     try {
@@ -61,8 +63,7 @@ exports.getProfile = async (req, res) => {
     }
 };
 
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+
 
 exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
