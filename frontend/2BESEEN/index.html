@@ -13,7 +13,7 @@
     <header>
         <nav class="main-navbar">
             <div class="logo-area">
-                <img src="/logo.png" alt="2beSeen" class="logo-img">
+                <img src="/imagens/logoHeader.jpeg" alt="2beSeen" class="logo-img">
                 <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
             </div>
             <div class="nav-links">
@@ -60,8 +60,37 @@
             </div>
         </div>
     </header>
-
+    <div class="slideshow-full">
+        <div class="slideshow-container">
+                <div class="slide fade">
+                    <img src="imagens/slideShow1.jpg" style="width:100%" alt="Slide 1">
+                    <div class="slide-caption">Impressão de alta qualidade</div>
+                </div>
+                <div class="slide fade">
+                    <img src="imagens/slideShow2.jpg" style="width:100%" alt="Slide 2">
+                    <div class="slide-caption">Entrega rápida e segura</div>
+                </div>
+                <div class="slide fade">
+                    <img src="imagens/slideshow3.jpg" style="width:100%" alt="Slide 3">
+                    <div class="slide-caption">Personalize o seu pedido online</div>
+                </div>
+                <div class="slide fade">
+                    <img src="imagens/slideshow4.jpg" style="width:100%" alt="Slide 4">
+                    <div class="slide-caption">Personalize o seu pedido online</div>
+                </div>
+                <!-- Botões de navegação -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <div class="slideshow-dots">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+    </div>
     <div class="container">
+        
         <div class="hero">
             <h1>Bem-vindo à nossa gráfica online</h1>
             <p>Oferecemos serviços de impressão de alta qualidade com entrega rápida.<br>
@@ -95,5 +124,5 @@
     <script src="src/js/header.js"></script>
     <script src="src/js/carrinho.js"></script>
 </body>
-
+<script src="src/js/index.js"></script>
 </html>
