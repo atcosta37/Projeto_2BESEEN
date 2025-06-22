@@ -1,6 +1,10 @@
 document.getElementById("loginForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
+    const errorDiv = document.getElementById("loginError");
+    errorDiv.style.display = "none";
+    errorDiv.textContent = "";
+
     const loginData = {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value
@@ -22,9 +26,13 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
             if (data.redirectTo) {
                 localStorage.setItem("jwtToken", data.token);
                 window.location.href = data.redirectTo;
-            } else if (data.error) {
-                alert(data.error);
+            } else if (data.error || data.mensagem) {
+                errorDiv.textContent = data.error || data.mensagem;
+                errorDiv.style.display = "block";
             }
         })
-        .catch(error => console.error('Erro:', error));
+        .catch(error => {
+            errorDiv.textContent = error.message;
+            errorDiv.style.display = "block";
+        });
 });

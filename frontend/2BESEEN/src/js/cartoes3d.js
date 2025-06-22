@@ -14,7 +14,7 @@ export function initCartao3D() {
     previewDiv.appendChild(renderer.domElement);
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(0, 1, 2);
+    light.position.set(0, 0, 4);
     scene.add(light);
 
     criarCardMesh(1.7, 1.1); // Tamanho inicial (5,5x8,5cm em proporção)

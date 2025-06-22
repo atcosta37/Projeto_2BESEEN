@@ -14,9 +14,17 @@ document.getElementById("formregister").addEventListener("submit", function (eve
     })
         .then(response => response.json())
         .then(data => {
+            const msgBox = document.getElementById("registerMsg");
             if (data.redirectTo) {
                 window.location.href = data.redirectTo;
+            } else if (data.mensagem) {
+                msgBox.textContent = data.mensagem;
+            } else {
+                msgBox.textContent = "Ocorreu um erro. Tente novamente.";
             }
         })
-        .catch(error => console.error('Erro:', error));
+        .catch(error => {
+            document.getElementById("registerMsg").textContent = "Ocorreu um erro. Tente novamente.";
+            console.error('Erro:', error);
+        });
 });

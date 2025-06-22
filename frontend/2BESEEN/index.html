@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2beSeen</title>
+    <!-- CSS principal da página -->
     <link rel="stylesheet" href="src/css/index.css">
+    <!-- CSS do header/navbar -->
     <link rel="stylesheet" href="src/css/header.css">
 </head>
 
 <body>
+    <!-- ===== HEADER E NAVEGAÇÃO ===== -->
     <header>
         <nav class="main-navbar">
             <div class="logo-area">
@@ -20,6 +23,7 @@
                 <a href="/index.html">Home</a>
                 <a href="/servicos.html">Serviços</a>
                 <a href="/portfolio.html">Portfólio</a>
+                <!-- Menu dropdown para "A Empresa" -->
                 <div class="dropdown">
                     <a href="#">A Empresa &#9662;</a>
                     <div id="submenu" class="submenu">
@@ -31,17 +35,21 @@
                 <a href="/contactos.html">Contactos</a>
             </div>
             <div class="header-actions">
+                <!-- Botão do carrinho -->
                 <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+                <!-- Botão de login -->
                 <a href="/login.html" class="login-button">Login</a>
+                <!-- Perfil do cliente (aparece quando autenticado) -->
                 <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
                     <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
                     <div class="perfil-dropdown" id="perfilDropdown">
-                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                        <button onclick="logout()" class="logout-button">Logout</button>
+                        <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()">Logout</button>
                     </div>
                 </div>
             </div>
         </nav>
+        <!-- Carrinho lateral -->
         <div id="carrinhoContainer" class="carrinho-container">
             <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar"
                 style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
@@ -60,82 +68,62 @@
             </div>
         </div>
     </header>
-    <div class="slideshow-full">
-        <div class="slideshow-container">
-                <div class="slide fade">
-                    <img src="imagens/slideShow1.jpg" style="width:100%" alt="Slide 1">
-                    <div class="slide-caption">Impressão de alta qualidade</div>
+
+    <!-- ===== ZONA DE BACKGROUND COM SLIDESHOW E HERO ===== -->
+    <div class="zona-background">
+        <!-- Slideshow de imagens de fundo -->
+        <div class="background-slideshow">
+            <img src="imagens/background1.jpg" class="bg-slide active" alt="Background 1">
+            <img src="imagens/background2.jpg" class="bg-slide" alt="Background 2">
+            <img src="imagens/background3.jpg" class="bg-slide" alt="Background 3">
+            <img src="imagens/background4.jpg" class="bg-slide" alt="Background 4">
+            <img src="imagens/background5.jpg" class="bg-slide" alt="Background 5">
+            <!-- Adiciona mais imagens se quiseres -->
+        </div>
+        <!-- Frase dinâmica do slideshow de fundo -->
+        <div class="bg-caption"></div>
+        <div class="container">
+
+            <!-- ===== HERO (Bem-vindo) ===== -->
+            <section class="hero">
+                <h1>Bem-vindo à 2BESEEN</h1>
+                <p>Impressão de alta qualidade para o seu negócio.<br>
+                    Soluções rápidas, personalizadas e profissionais.</p>
+                <a href="/contactos.html" class="cta-btn">Peça Orçamento</a>
+            </section>
+
+            <!-- ===== SERVIÇOS ===== -->
+            <section>
+                <h2 style="text-align: center;">OS NOSSOS SERVIÇOS</h2>
+                <div class="services">
+                    <!-- Cada caixa de serviço redireciona para a respetiva página -->
+                    <div class="service" onclick="window.location.href='/offset.html'" style="background: linear-gradient(90deg, #fff7f0 0%, #ffe0cc 100%);">
+                        <img src="imagens/impressao.jpg" alt="OFF SET DIGITAL">
+                        <div>OFFSET<br> DIGITAL</div>
+                    </div>
+                    <div class="service" onclick="window.location.href='/grandeFormato.html'" style="background: linear-gradient(90deg, #fff7f0 0%, #ffe0cc 100%);">
+                        <img src="imagens/grande-formato.jpg" alt="Grande Formato">
+                        <div>GRANDE <br> FORMATO</div>
+                    </div>
+                    <div class="service" onclick="window.location.href='/stands.html'" style="background: linear-gradient(90deg, #fff7f0 0%, #ffe0cc 100%);">
+                        <img src="imagens/stands.jpg" alt="Stands">
+                        <div>STANDS</div>
+                    </div>
                 </div>
-                <div class="slide fade">
-                    <img src="imagens/slideShow2.jpg" style="width:100%" alt="Slide 2">
-                    <div class="slide-caption">Entrega rápida e segura</div>
-                </div>
-                <div class="slide fade">
-                    <img src="imagens/slideshow3.jpg" style="width:100%" alt="Slide 3">
-                    <div class="slide-caption">Personalize o seu pedido online</div>
-                </div>
-                <div class="slide fade">
-                    <img src="imagens/slideshow4.jpg" style="width:100%" alt="Slide 4">
-                    <div class="slide-caption">Personalize o seu pedido online</div>
-                </div>
-                <!-- Botões de navegação -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <div class="slideshow-dots">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-            </div>
+            </section>
+        </div>
     </div>
-    <div class="container">
-    <section class="hero">
-        <h1>Bem-vindo à 2BESEEN</h1>
-        <p>Impressão de alta qualidade para o seu negócio.<br>
-        Soluções rápidas, personalizadas e profissionais.</p>
-        <a href="/contactos.html" class="cta-btn">Peça Orçamento</a>
-    </section>
 
-    <section>
-        <h2>Os nossos serviços</h2>
-        <div class="services">
-            <div class="service">
-                <span class="service-icon">🖨️</span>
-                <div>Impressão OffSet</div>
-            </div>
-            <div class="service">
-                <span class="service-icon">🎫</span>
-                <div>Grande Formato</div>
-            </div>
-            <div class="service">
-                <span class="service-icon">📁</span>
-                <div>Stands</div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Portfólio em Destaque</h2>
-        <div class="services">
-            <div class="service">
-                <img src="imagens/montraVinil.jpeg" alt="Projeto 1" style="width:100%; border-radius:10px; margin-bottom:10px;">
-                <div>Projeto 1</div>
-            </div>
-            <div class="service">
-                <img src="imagens/portfolio2.jpg" alt="Projeto 2" style="width:100%; border-radius:10px; margin-bottom:10px;">
-                <div>Projeto 2</div>
-            </div>
-            <!-- Adicione mais projetos conforme necessário -->
-        </div>
-    </section>
-</div>
+    <!-- ===== PORTFÓLIO COM SLIDESHOW DE FUNDO ===== -->
+    
+    <!-- Fim do conteúdo principal -->
 
     <footer>
         &copy; 2025 2beSeen - Todos os direitos reservados.
     </footer>
+    <!-- Scripts principais -->
     <script src="src/js/header.js"></script>
     <script src="src/js/carrinho.js"></script>
+    <script src="src/js/index.js"></script>
 </body>
-<script src="src/js/index.js"></script>
 </html>

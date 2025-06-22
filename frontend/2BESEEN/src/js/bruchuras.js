@@ -70,13 +70,15 @@ document.getElementById("personalizarForm").addEventListener("submit", async fun
         capa: document.getElementById("capa").value,
         encadernacao: document.getElementById("encadernacao").value,
         quantidade: document.getElementById("quantidade").value,
-        arquivo: arquivo ? arquivo.name : "Nenhum arquivo",
+        arquivo: arquivoUrl || "Nenhum arquivo",    
+        arquivoOriginal: arquivo ? arquivo.name : "",
         precoEstimado: precoEstimado
     };
-    adicionarAoCarrinho(dadosPedido);
+    if(adicionarAoCarrinho(dadosPedido)){;
     alert("Brochura adicionada ao carrinho!");
     document.getElementById("personalizarForm").reset();
     calcularPreco();
+    }
 });
 
 calcularPreco();

@@ -16,6 +16,7 @@ const orderSchema = new mongoose.Schema({
     papel: String,
     quantidade: Number,
     arquivo: String,
+    arquivoOriginal: String, // Nome original do arquivo enviado
     precoEstimado: Number,   // Para guardar o preço final
     dataPedido: { type: Date, default: Date.now },
     tipoServico: { type: String, enum: ['impressao', 'grande formato', 'flyers', 'cartoes', 'brochura', 'Stand'], required: true },
@@ -28,6 +29,8 @@ const orderSchema = new mongoose.Schema({
     mesas: Number,
     paredes: [paredeSchema],
     imagem: String, // base64 ou URL
+
+    // Dados do cliente
     nomeCliente: String,
     emailCliente: String,
     morada: String,

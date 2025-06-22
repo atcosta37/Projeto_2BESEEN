@@ -7,21 +7,6 @@ exports.createOrderRaw = async (orderData) => {
     return await order.save();
 }
 
-// Criar encomenda
-exports.createOrder = async (req, res) => {
-    try {
-        const newOrder = new Order({
-            ...req.body,
-            userId: req.user.userId
-        });
-        await newOrder.save();
-        res.status(201).json({ mensagem: "Encomenda criada com sucesso!", order: newOrder });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ mensagem: "Erro ao criar encomenda!" });
-    }
-};
-
 // Listar encomendas
 exports.listOrders = async (req, res) => {
     try {
@@ -67,19 +52,6 @@ exports.updateOrder = async (req, res) => {
         res.status(200).json({ mensagem: "Encomenda atualizada!", order: updatedOrder });
     } catch (err) {
         res.status(500).json({ mensagem: "Erro ao atualizar encomenda!" });
-    }
-};
-
-// Apagar encomenda
-exports.deleteOrder = async (req, res) => {
-    try {
-        const deletedOrder = await Order.findByIdAndDelete(req.params.id);
-        if (!deletedOrder) {
-            return res.status(404).json({ mensagem: "Encomenda não encontrada!" });
-        }
-        res.status(200).json({ mensagem: "Encomenda apagada!" });
-    } catch (err) {
-        res.status(500).json({ mensagem: "Erro ao apagar encomenda!" });
     }
 };
 

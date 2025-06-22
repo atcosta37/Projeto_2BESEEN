@@ -1,7 +1,8 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 0px;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
         }
 
@@ -88,4 +89,14 @@
         .login-links a:hover {
             color: #e65c00;
             text-decoration: underline;
+        }
+
+        .login-error {
+            color: #fff;
+            background: #ff6600;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            text-align: center;
+            display: none;
         }

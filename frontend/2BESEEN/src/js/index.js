@@ -1,24 +1,31 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+document.addEventListener("DOMContentLoaded", function () {
+    const bgSlides = document.querySelectorAll('.bg-slide');
+    const bgCaption = document.querySelector('.bg-caption');
+    let bgCurrent = 0;
 
-function plusSlides(n) { showSlides(slideIndex += n); }
-function currentSlide(n) { showSlides(slideIndex = n); }
+    // Frases para cada background
+    const bgCaptions = [
+        "TUDO SERÁ FEITO, PARA QUE A SUA COMUNICAÇÃO SEJA ÚNICA E DE GRANDE IMPACTO!",
+        "ULTRAPASSAR GRANDES DESAFIOS, É A NOSSA PRINCIPAL CAPACIDADE! ",
+        "VEMOS O FUTURO, COM A MELHOR TECNOLOGIA, DE HOJE!",
+        "PROPOMOS SEMPRE O QUE MELHOR SE ADAPTA, ÁS NECESSIDADES DOS CLIENTES!",
+        "A SATISFAÇÃO DO CLIENTE NO FINAL DO TRABALHO, É O QUE MAIS NOS MOTIVA! "
+    ];
 
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("slide");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active");
+    function showBgSlide(idx) {
+        bgSlides.forEach((img, i) => {
+            img.classList.toggle('active', i === idx);
+        });
+        // Atualiza a frase
+        if (bgCaption) {
+            bgCaption.textContent = bgCaptions[idx] || "";
+        }
     }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex-1].classList.add("active");
-    dots[slideIndex-1].className += " active";
-}
 
-// Auto-slide (opcional)
-setInterval(() => { plusSlides(1); }, 6000);
+    setInterval(() => {
+        bgCurrent = (bgCurrent + 1) % bgSlides.length;
+        showBgSlide(bgCurrent);
+    }, 4000);
+
+    showBgSlide(bgCurrent);
+});

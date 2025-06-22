@@ -17,8 +17,8 @@ body {
 }
 
 .perfil-dados {
-    min-width: 260px;
-    max-width: 340px;
+    min-width: 350px;
+    max-width: 400px;
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
@@ -26,6 +26,43 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.perfil-dados > *:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.dados-linha {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.dados-label {
+    font-weight: bold;
+    color: #ff6600;
+    min-width: 60px;
+}
+.dados-valor {
+    color: #232526;
+    word-break: break-all;
+}
+.logout-btn {
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 1.08em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.logout-btn:hover {
+    background: #e65c00;
+    color: #fff;
 }
 
 .perfil-encomendas-wrapper {

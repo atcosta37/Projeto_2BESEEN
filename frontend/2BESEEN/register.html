@@ -34,8 +34,8 @@
             <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
                 <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
                 <div class="perfil-dropdown" id="perfilDropdown">
-                    <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                    <button onclick="logout()" class="logout-button">Logout</button>
+                    <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                    <button onclick="logout()">Logout</button>
                 </div>
             </div>
         </div>
@@ -65,9 +65,10 @@
         <form id="formregister" action="submit" method="POST">
             <input type="text" id="nome" placeholder="Nome" required>
             <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Senha" required>
+            <input type="password" id="password" placeholder="Palavra-passe" required>
             <button type="submit">Registar</button>
         </form>
+        <div id="registerMsg" style="color:red; margin-top:12px;"></div>
         <div class="register-links">
             <p>Já tem uma conta? <a href="/login.html">Faça login</a></p>
         </div>

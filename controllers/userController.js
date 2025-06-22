@@ -91,7 +91,20 @@ exports.forgotPassword = async (req, res) => {
         from: `"2BESEEN" <${process.env.EMAIL_USER}>`,
         to: user.email,
         subject: "Recuperação de palavra-passe",
-        html: `<p>Clique no link para definir uma nova palavra-passe:</p><a href="${resetUrl}">${resetUrl}</a>`
+        html: `
+        <div style="font-family: Arial, sans-serif; background: #f9f9f9; padding: 32px;">
+            <div style="max-width: 480px; margin: auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #ff660022; padding: 32px;">
+                <h2 style="color: #ff6600; margin-bottom: 18px;">Recuperação de Palavra-passe</h2>
+                <p>Olá <b>${user.nome}</b>,</p>
+                <p>Recebemos um pedido para redefinir a sua palavra-passe. Para continuar, clique no botão abaixo:</p>
+                <a href="${resetUrl}" style="display:inline-block; background:#ff6600; color:#fff; text-decoration:none; padding:12px 28px; border-radius:6px; font-weight:bold; margin:18px 0;">Definir nova palavra-passe</a>
+                <p>Ou copie e cole este link no seu navegador:</p>
+                <p style="word-break:break-all; color:#555;">${resetUrl}</p>
+                <hr style="margin:24px 0;">
+                <p style="font-size:0.95em; color:#888;">Se não pediu esta alteração, ignore este email.<br>O link é válido por 1 hora.</p>
+                <p style="color:#ff6600; font-weight:bold; margin-top:24px;">2BESEEN</p>
+            </div>
+        </div>`
     });
 
     res.json({ mensagem: "Enviámos um link de recuperação para o seu email." });

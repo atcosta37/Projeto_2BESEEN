@@ -4,6 +4,12 @@ if (localStorage.getItem("carrinho")) {
     renderizarCarrinho();
 }
 function adicionarAoCarrinho(item) {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+        alert("Tem de iniciar sessão para adicionar ao carrinho.");
+        window.location.href = "/login.html";
+        return false;
+    }else{
     const precoEstimadoElem = document.getElementById("precoEstimado");
     if (precoEstimadoElem) {
         const precoEstimadoText = precoEstimadoElem.textContent;
@@ -15,27 +21,11 @@ function adicionarAoCarrinho(item) {
     carrinho.push(item);
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     renderizarCarrinho();
-}
-
-
-function calcularPrecoItem(item) {
-    // Exemplo de preços base (ajusta conforme necessário)
-    const precosBase = {
-        "A4": { "SRA3 150 grs": 0.50, "SRA3 200 grs": 0.65, "SRA3 250 grs": 0.80 },
-        "A5": { "SRA3 150 grs": 0.50, "SRA3 200 grs": 0.65, "SRA3 250 grs": 0.80 },
-        "5,5x8,5": { "SRA3 250 grs": 0.80, "SRA3 300 grs": 0.90, "SRA3 350 grs": 1.00 },
-        "7,5x10,5": { "SRA3 250 grs": 0.80, "SRA3 300 grs": 0.90, "SRA3 350 grs": 1.00 },
-        "10x10": { "SRA3 250 grs": 0.80, "SRA3 300 grs": 0.90, "SRA3 350 grs": 1.00 }
-    };
-    let precoUnitario = precosBase[item.tamanho]?.[item.papel] || 0;
-    let total = precoUnitario * (parseInt(item.quantidade) || 1);
-
-    // Exemplo: custo extra para impressão frente e verso
-    if (item.impressao === "frente verso") {
-        total += 2.50;
     }
-    return total;
 }
+
+
+
 
 function renderizarCarrinho() {
     const lista = document.getElementById("carrinhoLista");

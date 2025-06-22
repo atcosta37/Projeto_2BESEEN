@@ -36,14 +36,14 @@ document.getElementById("personalizarForm").addEventListener("submit", async fun
         const resp = await fetch("/api/upload", { method: "POST", body: formData });
         const data = await resp.json();
         arquivoUrl = data.url; // O backend deve devolver { url: "/uploads/ficheiro.pdf" }
-        console.log("Arquivo enviado:", arquivoUrl);
     }
     const dadosPedido = {
         tipoServico: "grande formato",
         papel: document.getElementById("material").value,
         tamanho: `${document.getElementById("largura").value}x${document.getElementById("altura").value}`,
         quantidade: document.getElementById("quantidade").value,
-        arquivo: arquivoUrl,
+        arquivo: arquivoUrl || "Nenhum arquivo",    
+        arquivoOriginal: arquivo ? arquivo.name : "",
         precoEstimado: document.getElementById("precoEstimado").textContent.replace("Preço estimado: €", "")
     };
     adicionarAoCarrinho(dadosPedido);

@@ -36,8 +36,8 @@
                 <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
                     <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
                     <div class="perfil-dropdown" id="perfilDropdown">
-                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                        <button onclick="logout()" class="logout-button">Logout</button>
+                        <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()">Logout</button>
                     </div>
                 </div>
             </div>
@@ -332,11 +332,11 @@
             offset.copy(intersects[0].point).sub(selectedObject.position);
             mostrarPainelPersonalizacao(selectedObject);
             if (controls) controls.enabled = false; // <-- mostra e sincroniza
-            console.log("Objeto selecionado:", selectedObject.userData.tipo);
+            
         } else {
             selectedObject = null;
             esconderPainelPersonalizacao(); // <-- esconde se não houver seleção
-            console.log("Nenhum objeto selecionado");
+            
         }
     }
     function onMouseUp() {

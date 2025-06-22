@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <header>
+     <header>
         <nav class="main-navbar">
             <div class="logo-area">
                 <img src="/imagens/logoHeader.jpeg" alt="2beSeen" class="logo-img">
@@ -21,8 +21,9 @@
                 <a href="/index.html">Home</a>
                 <a href="/servicos.html">Serviços</a>
                 <a href="/portfolio.html">Portfólio</a>
+                <!-- Menu dropdown para "A Empresa" -->
                 <div class="dropdown">
-                    <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                    <a href="#">A Empresa &#9662;</a>
                     <div id="submenu" class="submenu">
                         <a href="/oque-somos.html#oque-somos">O Que Somos</a>
                         <a href="/oque-somos.html#oque-fazemos">O Que Fazemos</a>
@@ -32,17 +33,21 @@
                 <a href="/contactos.html">Contactos</a>
             </div>
             <div class="header-actions">
+                <!-- Botão do carrinho -->
                 <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+                <!-- Botão de login -->
                 <a href="/login.html" class="login-button">Login</a>
+                <!-- Perfil do cliente (aparece quando autenticado) -->
                 <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
                     <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
                     <div class="perfil-dropdown" id="perfilDropdown">
-                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                        <button onclick="logout()" class="logout-button">Logout</button>
+                        <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()">Logout</button>
                     </div>
                 </div>
-
+            </div>
         </nav>
+        <!-- Carrinho lateral -->
         <div id="carrinhoContainer" class="carrinho-container">
             <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar"
                 style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
@@ -85,7 +90,7 @@
         </div>
     </div>
     <div class="contact-form">
-        <h2>Envie-nos uma mensagem</h2>
+        <h2>O MEU PEDIDO</h2>
         <form id="formContacto" autocomplete="off">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
@@ -105,8 +110,8 @@
         &copy; 2025 2beSeen - Todos os direitos reservados.
     </footer>
 </body>
-<script src="src/js/global.js"></script>
 <script src="src/js/carrinho.js"></script>
+<script src="src/js/header.js"></script>
 <script src="src/js/contactos.js"></script>
 
 </html>

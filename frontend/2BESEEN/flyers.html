@@ -37,8 +37,8 @@
                 <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
                     <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
                     <div class="perfil-dropdown" id="perfilDropdown">
-                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                        <button onclick="logout()" class="logout-button">Logout</button>
+                        <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()">Logout</button>
                     </div>
                 </div>
             </div>
@@ -70,18 +70,11 @@
         <div class="coluna-direita">
             <h2>Personalizar Flyers</h2>
             <form id="personalizarForm">
-                <label for="tamanho">Tamanho:
-                    <span title="Cada folha SRA3 permite 2 flyers A4 ou 4 flyers A5" style="cursor: help;">ℹ️</span>
-                </label>
+                <label for="tamanho">Tamanho:</label>
                 <select id="tamanho">
                     <option value="A4">A4</option>
                     <option value="A5">A5</option>
                 </select>
-                <small>
-                    Nota: Usamos folhas SRA3 para imprimir os flyers. Cada folha SRA3 permite imprimir:<br>
-                    • 2 flyers A4<br>
-                    • 4 flyers A5
-                </small>
                 <label for="papel">Tipo de Papel:</label>
                 <select id="papel">
                     <option value="SRA3 150 grs">SRA3 150 grs</option>

@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Só mostra a tabela de stands se houver stands
         encomendasStandsBox.style.display = temStands ? "block" : "none";
     } catch (err) {
-        console.error("Erro ao buscar encomendas:", err);
         alert("Erro ao carregar encomendas.");
     }
 });

@@ -21,9 +21,12 @@ carregarCarrinho();
 
 // --- PayPal só disponível se formulário estiver válido ---
 function isFormValido() {
-    const morada = document.getElementById("morada").value.trim();
+    const rua = document.getElementById("rua").value.trim();
+    const codigoPostal = document.getElementById("codigoPostal").value.trim();
+    const localidade = document.getElementById("localidade").value.trim();
+    const distrito = document.getElementById("distrito").value.trim();
     const telefone = document.getElementById("telefone").value.trim();
-    return morada.length > 0 && telefone.length > 0;
+    return rua && codigoPostal && localidade && distrito && telefone.length === 9;
 }
 
 function renderPayPalButton() {
@@ -51,8 +54,13 @@ function renderPayPalButton() {
         onApprove: async function (data, actions) {
             const token = localStorage.getItem("jwtToken");
             const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
-            const morada = document.getElementById("morada").value;
-            const telefone = document.getElementById("telefone").value;
+            const rua = document.getElementById("rua").value.trim();
+            const codigoPostal = document.getElementById("codigoPostal").value.trim();
+            const localidade = document.getElementById("localidade").value.trim();
+            const distrito = document.getElementById("distrito").value.trim();
+            const telefone = document.getElementById("telefone").value.trim();
+
+            const morada = `${rua}, ${codigoPostal} ${localidade}, ${distrito}`;
 
             // Chama o backend para capturar o pagamento
             const resposta = await fetch("/api/paypal/capture-order", {
@@ -83,7 +91,10 @@ function checkFormAndTogglePayPal() {
     }
 }
 
-document.getElementById("morada").addEventListener("input", checkFormAndTogglePayPal);
+document.getElementById("rua").addEventListener("input", checkFormAndTogglePayPal);
+document.getElementById("codigoPostal").addEventListener("input", checkFormAndTogglePayPal);
+document.getElementById("localidade").addEventListener("input", checkFormAndTogglePayPal);
+document.getElementById("distrito").addEventListener("input", checkFormAndTogglePayPal);
 document.getElementById("telefone").addEventListener("input", checkFormAndTogglePayPal);
 
 // Inicialmente desativa o botão PayPal

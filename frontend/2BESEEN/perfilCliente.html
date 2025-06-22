@@ -66,14 +66,17 @@
             <aside class="perfil-dados">
                 <h2 style="color:#ff6600; margin-bottom:24px;">Perfil do Cliente</h2>
                 <div class="dados-pessoais-simples">
-                    <div class="dados-label">Nome:</div>
-                    <div class="dados-valor" id="perfilNomeCliente"></div>
-                    <div class="dados-label">Email:</div>
-                    <div class="dados-valor" id="perfilEmailCliente"></div>
+                    <div class="dados-linha">
+                        <span class="dados-label">Nome:</span>
+                        <span class="dados-valor" id="perfilNomeCliente"></span>
+                    </div>
+                    <div class="dados-linha">
+                        <span class="dados-label">Email:</span>
+                        <span class="dados-valor" id="perfilEmailCliente"></span>
+                    </div>
                 </div>
                 <div class="dados-botoes">
-                    <button onclick="editarDados()">Editar Dados</button>
-                    <button onclick="logout()">Logout</button>
+                    <button onclick="logout()" class="logout-btn">Logout</button>
                 </div>
             </aside>
             <section class="perfil-encomendas-wrapper">

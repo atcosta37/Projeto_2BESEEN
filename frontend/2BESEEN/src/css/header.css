@@ -218,7 +218,7 @@ header {
     background: #232526;
     border-radius: 8px;
     box-shadow: 0 4px 16px #ff660044;
-    min-width: 120px;
+    max-width: 120px;
     z-index: 999;
     padding: 10px 0;
 }

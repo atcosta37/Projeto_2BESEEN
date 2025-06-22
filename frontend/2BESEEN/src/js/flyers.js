@@ -53,18 +53,14 @@ document.getElementById("personalizarForm").addEventListener("submit", async fun
         papel: document.getElementById("papel").value,
         quantidade: document.getElementById("quantidade").value,
         impressao: document.getElementById("impressao").value,
-        arquivo: arquivo ? arquivo.name : "Nenhum arquivo"
+        arquivo: arquivoUrl || "Nenhum arquivo",    
+        arquivoOriginal: arquivo ? arquivo.name : ""
     };
 
-    adicionarAoCarrinho(dadosPedido);
+    if(adicionarAoCarrinho(dadosPedido)){
     alert("Pedido adicionado ao carrinho!");
     document.getElementById("personalizarForm").reset();
     calcularPreco();
+    }
 });
-
-function logout() {
-    localStorage.removeItem("jwtToken");
-    window.location.href = "/login";
-}
-
 calcularPreco();

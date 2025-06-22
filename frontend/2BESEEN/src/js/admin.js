@@ -20,28 +20,28 @@ document.getElementById("fecharDetalhesBtn").onclick = function () {
 function mostrarDetalhesEncomenda(pedido) {
     // Cliente
     const clienteCampos = [
-        { label: "Nome", valor: pedido.nomeCliente || pedido.userId?.nome || '-' },
-        { label: "Email", valor: pedido.emailCliente || pedido.userId?.email || '-' },
-        { label: "Morada", valor: pedido.morada || '-' },
-        { label: "Telefone", valor: pedido.telefoneCliente || '-' }
-    ];
+        { label: "Nome", valor: pedido.nomeCliente || pedido.userId?.nome },
+        { label: "Email", valor: pedido.emailCliente || pedido.userId?.email },
+        { label: "Morada", valor: pedido.morada },
+        { label: "Telefone", valor: pedido.telefoneCliente }
+    ].filter(campo => campo.valor && campo.valor !== "-");
 
     // Produto/Encomenda
     const encomendaCampos = [
-        { label: "Tipo de Serviço", valor: pedido.tipoServico || '-' },
-        { label: "Tamanho", valor: pedido.tamanho || (pedido.baseLargura && pedido.baseProfundidade ? `${pedido.baseLargura} x ${pedido.baseProfundidade}` : '-') },
-        { label: "Formato", valor: pedido.formato || '-' },
-        { label: "Papel/Material", valor: pedido.papel || '-' },
-        { label: "Quantidade", valor: pedido.quantidade || '-' },
-        { label: "Arquivo", valor: pedido.arquivo ? `<a href="/download/${pedido.arquivo.split('/').pop()}" target="_blank">${pedido.arquivo.split('/').pop()} ⬇️</a>` : '-' },
-        { label: "Cadeiras", valor: pedido.cadeiras ?? '-' },
-        { label: "Mesas", valor: pedido.mesas ?? '-' },
-        { label: "Paredes", valor: Array.isArray(pedido.paredes) && pedido.paredes.length > 0 ? pedido.paredes.map(p => `${p.quantidade}x ${p.material}`).join(", ") : '-' },
-        { label: "Preço", valor: pedido.precoEstimado ? pedido.precoEstimado.toFixed(2) + " €" : '-' },
-        { label: "Data", valor: pedido.dataPedido ? new Date(pedido.dataPedido).toLocaleString() : '-' },
-        { label: "Estado", valor: pedido.estado || '-' },
-        { label: "Imagem", valor: pedido.imagem ? `<a href="${pedido.imagem}" target="_blank"><img src="${pedido.imagem}" style="max-width:120px;max-height:90px;border-radius:6px;" alt="stand"></a>` : '-' }
-    ];
+        { label: "Tipo de Serviço", valor: pedido.tipoServico },
+        { label: "Tamanho", valor: pedido.tamanho || (pedido.baseLargura && pedido.baseProfundidade ? `${pedido.baseLargura} x ${pedido.baseProfundidade}` : undefined) },
+        { label: "Formato", valor: pedido.formato },
+        { label: "Papel/Material", valor: pedido.papel },
+        { label: "Quantidade", valor: pedido.quantidade },
+        { label: "Arquivo", valor: pedido.arquivo ? `<a href="/download/${pedido.arquivo.split('/').pop()}" target="_blank">${pedido.arquivo.split('/').pop()} ⬇️</a>` : undefined },
+        { label: "Cadeiras", valor: pedido.cadeiras },
+        { label: "Mesas", valor: pedido.mesas },
+        { label: "Paredes", valor: Array.isArray(pedido.paredes) && pedido.paredes.length > 0 ? pedido.paredes.map(p => `${p.quantidade}x ${p.material}`).join(", ") : undefined },
+        { label: "Preço", valor: pedido.precoEstimado ? pedido.precoEstimado.toFixed(2) + " €" : undefined },
+        { label: "Data", valor: pedido.dataPedido ? new Date(pedido.dataPedido).toLocaleString() : undefined },
+        { label: "Estado", valor: pedido.estado },
+        { label: "Imagem", valor: pedido.imagem ? `<a href="${pedido.imagem}" target="_blank"><img src="${pedido.imagem}" style="max-width:120px;max-height:90px;border-radius:6px;" alt="stand"></a>` : undefined }
+    ].filter(campo => campo.valor !== undefined && campo.valor !== null && campo.valor !== "-");
 
     const conteudo = document.getElementById("detalhesEncomendaConteudo");
     conteudo.innerHTML = `

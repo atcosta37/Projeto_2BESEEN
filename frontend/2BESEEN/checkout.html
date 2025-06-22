@@ -24,8 +24,9 @@
                 <a href="/index.html">Home</a>
                 <a href="/servicos.html">Serviços</a>
                 <a href="/portfolio.html">Portfólio</a>
+                <!-- Menu dropdown para "A Empresa" -->
                 <div class="dropdown">
-                    <a href="#" onclick="toggleSubMenu(event)">A Empresa &#9662;</a>
+                    <a href="#">A Empresa &#9662;</a>
                     <div id="submenu" class="submenu">
                         <a href="/oque-somos.html#oque-somos">O Que Somos</a>
                         <a href="/oque-somos.html#oque-fazemos">O Que Fazemos</a>
@@ -35,15 +36,38 @@
                 <a href="/contactos.html">Contactos</a>
             </div>
             <div class="header-actions">
+                <!-- Botão do carrinho -->
+                <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+                <!-- Botão de login -->
                 <a href="/login.html" class="login-button">Login</a>
+                <!-- Perfil do cliente (aparece quando autenticado) -->
                 <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
                     <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
                     <div class="perfil-dropdown" id="perfilDropdown">
-                        <a href="perfilCliente.html" class="perfil-btn" id="perfilBtn">Perfil</a>
-                        <button onclick="logout()" class="logout-button">Logout</button>
+                        <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()">Logout</button>
                     </div>
                 </div>
+            </div>
         </nav>
+        <!-- Carrinho lateral -->
+        <div id="carrinhoContainer" class="carrinho-container">
+            <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar"
+                style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+            <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+                <span style="font-size:1.2em;">🛒</span> Carrinho
+            </h3>
+            <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+            <div id="carrinhoTotal"
+                style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+            <button onclick="confirmarPedido()" class="carrinho-confirmar"
+                style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar
+                Pedido</button>
+            <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+                <span style="font-size:2em;">🛍️</span><br>
+                O seu carrinho está vazio.
+            </div>
+        </div>
     </header>
     <div class="checkout-container">
         <div class="checkout-resumo">
@@ -65,11 +89,22 @@
         <div class="checkout-form">
             <h2>Dados para Entrega</h2>
             <form id="formCheckout" autocomplete="off">
-                <label for="morada">Morada de Entrega</label>
-                <textarea id="morada" name="morada" rows="2" required></textarea>
+                <label for="rua">Rua / Morada</label>
+                <input type="text" id="rua" name="rua" required>
+
+                <label for="codigoPostal">Código Postal</label>
+                <input type="text" id="codigoPostal" name="codigoPostal" pattern="\\d{4}-\\d{3}" maxlength="8"
+                    placeholder="1234-567" required>
+
+                <label for="localidade">Localidade</label>
+                <input type="text" id="localidade" name="localidade" required>
+
+                <label for="distrito">Distrito</label>
+                <input type="text" id="distrito" name="distrito" required>
+
                 <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" required>
-                <!-- Removido o botão de submit -->
+                <input type="tel" id="telefone" name="telefone" pattern="^\\d{9}$" maxlength="9" inputmode="numeric"
+                    required>
             </form>
             <div id="paypal-button-container" style="margin-top: 24px;"></div>
         </div>
@@ -79,5 +114,6 @@
     </footer>
 </body>
 <script src="src/js/checkout.js"></script>
+<script src="src/js/header.js"></script>
 
 </html>

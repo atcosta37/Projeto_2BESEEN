@@ -4,16 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Encomenda Realizada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/sucess_order.css">
+    <link rel="stylesheet" href="src/css/header.css">
 </head>
 
 <body>
+    <header>
+        <nav class="main-navbar">
+            <div class="logo-area">
+                <img src="/imagens/logoHeader.jpeg" alt="2beSeen" class="logo-img">
+                <span class="brand-title">2BESEEN <span class="brand-sub">Impressão de Qualidade</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/servicos.html">Serviços</a>
+                <a href="/portfolio.html">Portfólio</a>
+                <!-- Menu dropdown para "A Empresa" -->
+                <div class="dropdown">
+                    <a href="#">A Empresa &#9662;</a>
+                    <div id="submenu" class="submenu">
+                        <a href="/oque-somos.html#oque-somos">O Que Somos</a>
+                        <a href="/oque-somos.html#oque-fazemos">O Que Fazemos</a>
+                        <a href="/oque-somos.html#equipa">A Equipa</a>
+                    </div>
+                </div>
+                <a href="/contactos.html">Contactos</a>
+            </div>
+            <div class="header-actions">
+                <!-- Botão do carrinho -->
+                <button onclick="toggleCarrinho()" class="carrinho-button" title="Ver Carrinho">🛒</button>
+                <!-- Botão de login -->
+                <a href="/login.html" class="login-button">Login</a>
+                <!-- Perfil do cliente (aparece quando autenticado) -->
+                <div id="perfilCliente" class="perfil-container" style="display:none !important; position:relative;">
+                    <span class="perfil-nome" id="nomeCliente" tabindex="0"></span>
+                    <div class="perfil-dropdown" id="perfilDropdown">
+                        <a href="perfilCliente.html" id="perfilBtn">Perfil</a>
+                        <button onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Carrinho lateral -->
+        <div id="carrinhoContainer" class="carrinho-container">
+            <button onclick="toggleCarrinho()" class="carrinho-fechar" title="Fechar"
+                style="background:none; border:none; position:absolute; top:18px; right:18px; font-size:1.5em; color:#ff6600; cursor:pointer;">✕</button>
+            <h3 style="color:#ff6600; margin-top:0; margin-bottom:22px; text-align:center;">
+                <span style="font-size:1.2em;">🛒</span> Carrinho
+            </h3>
+            <ul id="carrinhoLista" style="list-style:none; padding:0; margin:0 0 18px 0; min-height:40px;"></ul>
+            <div id="carrinhoTotal"
+                style="font-weight:bold; font-size:18px; color:#e65c00; text-align:right; margin-bottom:18px;"></div>
+            <button onclick="confirmarPedido()" class="carrinho-confirmar"
+                style="background:#ff6600; color:#232526; border:none; border-radius:8px; padding:12px 0; font-weight:600; font-size:1.1rem; cursor:pointer; width:100%; box-shadow:0 2px 8px #ff660033;">Confirmar
+                Pedido</button>
+            <div id="carrinhoVazio" style="display:none; text-align:center; color:#aaa; margin-top:18px;">
+                <span style="font-size:2em;">🛍️</span><br>
+                O seu carrinho está vazio.
+            </div>
+        </div>
+    </header>
     <div class="sucesso-container">
-        <h1>Obrigado pela sua encomenda!</h1>
-        <p id="mensagem"></p>
-        <a href="index.html">Voltar à página inicial</a>
+        <h2 style="color:#ff6600; margin-bottom:18px;">
+            <span style="font-size:1.2em;">✅</span> Encomenda Realizada
+        </h2>
+        <p id="mensagem" style="color:#232526; font-size:1.1em; margin-bottom:24px;"></p>
+        <a href="index.html"
+            style="display:inline-block; background:#ff6600; color:#fff; padding:12px 32px; border-radius:7px; text-decoration:none; font-weight:600; font-size:1.08em; box-shadow:0 2px 8px #ff660033; transition:background 0.2s;">Voltar
+            à página inicial</a>
     </div>
-    <footer>
+    <footer
+        style="background-color:#232526; color:white; padding:14px 0; text-align:center; font-size:1em; letter-spacing:0.5px; margin-top:40px;">
         &copy; 2025 2beSeen - Todos os direitos reservados.
     </footer>
     <script>
@@ -22,6 +84,7 @@
             document.getElementById("mensagem").textContent = "A sua encomenda foi registada com sucesso!";
         });
     </script>
+    <script src="src/js/header.js"></script>
 </body>
 
 </html>
