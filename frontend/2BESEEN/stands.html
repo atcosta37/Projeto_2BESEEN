@@ -69,8 +69,6 @@
                 <h4>Personalizar Objeto</h4>
                 <label for="corObjeto">Cor:</label>
                 <input type="color" id="corObjeto"><br>
-                <label for="escalaObjeto">Tamanho:</label>
-                <input type="range" id="escalaObjeto" min="0.5" max="2" step="0.01" value="1"><br>
                 <label for="rotacaoObjeto">Rotação:</label>
                 <input type="range" id="rotacaoObjeto" min="0" max="360" step="1" value="0">
             </div>
@@ -390,7 +388,6 @@
         painel.style.display = "block";
         // Atualiza os valores dos inputs
         document.getElementById("corObjeto").value = rgbToHex(obj.material.color);
-        document.getElementById("escalaObjeto").value = obj.scale.x;
         document.getElementById("rotacaoObjeto").value = Math.round(THREE.MathUtils.radToDeg(obj.rotation.y));
     }
     function esconderPainelPersonalizacao() {
@@ -404,11 +401,7 @@
             selectedObject.material.color.set(this.value);
         }
     });
-    document.getElementById("escalaObjeto").addEventListener("input", function () {
-        if (selectedObject) {
-            selectedObject.scale.set(Number(this.value), Number(this.value), Number(this.value));
-        }
-    });
+
     document.getElementById("rotacaoObjeto").addEventListener("input", function () {
         if (selectedObject) {
             selectedObject.rotation.y = THREE.MathUtils.degToRad(Number(this.value));
