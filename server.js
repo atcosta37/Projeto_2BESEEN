@@ -48,7 +48,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // ===== CONFIGURAÇÃO DO MULTER PARA UPLOADS =====
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'uploads'));
+        cb(null, path.join(__dirname, 'upload'));
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -173,7 +173,7 @@ app.post('/api/upload', upload.single('arquivo'), (req, res) => {
 // ===== DOWNLOAD DE FICHEIROS =====
 app.get('/download/:filename', (req, res) => {
     const filename = req.params.filename;
-    const filePath = path.join(__dirname, 'uploads', filename);
+    const filePath = path.join(__dirname, 'upload', filename);
 
     // Verifica se o ficheiro existe
     if (!fs.existsSync(filePath)) {

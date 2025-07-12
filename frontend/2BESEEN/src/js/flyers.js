@@ -41,26 +41,33 @@ document.getElementById("personalizarForm").addEventListener("submit", async fun
     let arquivoUrl = "";
 
     if (arquivo) {
-        const formData = new FormData();
-        formData.append("arquivo", arquivo);
-        const resp = await fetch("/api/upload", { method: "POST", body: formData });
-        const data = await resp.json();
-        arquivoUrl = data.url; // O backend deve devolver { url: "/uploads/ficheiro.pdf" }
+        try {
+            const formData = new FormData();
+            formData.append("arquivo", arquivo);
+            const resp = await fetch("/api/upload", { method: "POST", body: formData });
+            if (!resp.ok) throw new Error("Erro ao fazer upload do ficheiro.");
+            const data = await resp.json();
+            arquivoUrl = data.url;
+        } catch (err) {
+            alert("Erro ao fazer upload do ficheiro. Tente novamente.");
+            return;
+        }
     }
+
     const dadosPedido = {
         tipoServico: "flyers",
         tamanho: document.getElementById("tamanho").value,
         papel: document.getElementById("papel").value,
         quantidade: document.getElementById("quantidade").value,
         impressao: document.getElementById("impressao").value,
-        arquivo: arquivoUrl || "Nenhum arquivo",    
+        arquivo: arquivoUrl || "Nenhum arquivo",
         arquivoOriginal: arquivo ? arquivo.name : ""
     };
 
-    if(adicionarAoCarrinho(dadosPedido)){
-    alert("Pedido adicionado ao carrinho!");
-    document.getElementById("personalizarForm").reset();
-    calcularPreco();
+    if (adicionarAoCarrinho(dadosPedido)) {
+        alert("Pedido adicionado ao carrinho!");
+        document.getElementById("personalizarForm").reset();
+        calcularPreco();
     }
 });
 calcularPreco();

@@ -21,6 +21,7 @@ function adicionarAoCarrinho(item) {
     carrinho.push(item);
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
     renderizarCarrinho();
+    return true;
     }
 }
 
